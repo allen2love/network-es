@@ -30,6 +30,7 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* 液態波浪背景層 */
         .liquid-bg {
             position: fixed;
             top: 0;
@@ -75,6 +76,7 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* 主容器 */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -83,6 +85,7 @@
             z-index: 1;
         }
 
+        /* 液態玻璃卡片樣式 */
         .glass-card {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px) saturate(180%);
@@ -95,8 +98,12 @@
                 0 0 80px rgba(255, 255, 255, 0.1);
             padding: 40px;
             margin: 20px 0;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
         }
 
+        /* 麵包屑導航 */
         .breadcrumb {
             backdrop-filter: blur(15px);
             background: rgba(255, 255, 255, 0.1);
@@ -114,6 +121,7 @@
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             transition: color 0.3s ease;
+            font-size: 0.95rem;
         }
 
         .breadcrumb a:hover {
@@ -129,6 +137,7 @@
             font-weight: 600;
         }
 
+        /* 標題區域 */
         .page-header {
             text-align: center;
             padding: 60px 20px;
@@ -140,12 +149,24 @@
             font-weight: 700;
             margin-bottom: 20px;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: floatText 3s ease-in-out infinite;
+        }
+
+        @keyframes floatText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .page-header p {
             color: rgba(255, 255, 255, 0.9);
             font-size: 1.3rem;
+            margin-bottom: 40px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 內容區塊 */
+        .content-section {
+            margin: 30px 0;
         }
 
         .content-section h2 {
@@ -155,6 +176,13 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
+        .content-section h3 {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.5rem;
+            margin: 25px 0 15px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
         .content-section p {
             color: rgba(255, 255, 255, 0.9);
             line-height: 1.8;
@@ -162,6 +190,37 @@
             margin-bottom: 15px;
         }
 
+        .content-section ul {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .content-section ul li {
+            margin-bottom: 10px;
+        }
+
+        /* 程式碼區塊 */
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            color: #a8e6cf;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* 示範區塊 */
         .demo-box {
             background: rgba(255, 255, 255, 0.1);
             border: 2px dashed rgba(255, 255, 255, 0.4);
@@ -169,7 +228,7 @@
             padding: 40px;
             margin: 30px 0;
             text-align: center;
-            min-height: 300px;
+            min-height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -179,17 +238,25 @@
 
         .demo-box p {
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 600;
             z-index: 1;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 特效示範：波浪動畫 */
+        .wave-demo {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
         }
 
         .wave-demo .demo-wave {
             position: absolute;
             width: 150%;
             height: 150%;
-            background: radial-gradient(circle, rgba(124, 245, 255, 0.4) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(124, 245, 255, 0.3) 0%, transparent 70%);
             border-radius: 40%;
             animation: demoWave 15s infinite linear;
         }
@@ -212,6 +279,7 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* 按鈕 */
         .btn {
             display: inline-block;
             padding: 15px 40px;
@@ -234,6 +302,16 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
+        .btn-secondary {
+            background: rgba(124, 245, 255, 0.2);
+            border-color: rgba(124, 245, 255, 0.6);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(124, 245, 255, 0.35);
+        }
+
+        /* 頁尾 */
         footer {
             text-align: center;
             padding: 30px;
@@ -245,14 +323,45 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
+        /* 響應式設計 */
         @media (max-width: 768px) {
             .page-header h1 {
                 font-size: 2.5rem;
             }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .glass-card {
+                padding: 25px;
+            }
+
+            .btn {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+
+        /* 載入動畫 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
         }
     </style>
 </head>
 <body>
+    <!-- 液態波浪背景 -->
     <div class="liquid-bg">
         <div class="wave"></div>
         <div class="wave"></div>
@@ -261,7 +370,7 @@
 
     <div class="container">
         <!-- 麵包屑導航 -->
-        <nav class="breadcrumb">
+        <nav class="breadcrumb fade-in">
             <a href="index.html">🏠 首頁</a>
             <span>/</span>
             <a href="index.html#features">分類資訊</a>
@@ -269,19 +378,27 @@
             <span class="current">🌊 波浪動畫</span>
         </nav>
 
-        <!-- 標題 -->
-        <div class="glass-card page-header">
+        <!-- 標題區域 -->
+        <div class="glass-card page-header fade-in">
             <h1>🌊 波浪動畫</h1>
             <p>背景波浪動畫增添了流動感和生命力</p>
         </div>
 
-        <!-- 內容 -->
-        <section class="glass-card content-section">
+        <!-- 概述 -->
+        <section class="glass-card content-section fade-in">
             <h2>💡 設計概念</h2>
             <p>
-                波浪動畫是液態玻璃設計風格的核心元素，透過緩慢旋轉的徑向漸變圖形，
+                波浪動畫是液態玻璃設計風格的靈魂元素之一。透過緩慢旋轉的徑向漸變圖形，
                 創造出如同液體般流動的視覺效果，為靜態頁面注入動態的生命力。
             </p>
             <p>
-                這種設計不僅提升視覺吸引力，更能營造出放鬆、沉浸的氛圍，
-                讓使用者在瀏覽網站時獲得更
+                這種設計不僅提升了視覺吸引力，更能營造出放鬆、沉浸的氛圍，
+                讓使用者在瀏覽網站時獲得更舒適的體驗。
+            </p>
+        </section>
+
+        <!-- 技術實現 -->
+        <section class="glass-card content-section fade-in">
+            <h2>⚙️ 技術實現</h2>
+            
+            <h3>1.
