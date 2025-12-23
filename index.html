@@ -215,6 +215,103 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
+                /* ==================== 🎯 新增：分類卡片連結樣式 ==================== */
+        
+        /* 可點擊的卡片連結 */
+        .grid-item-link {
+            text-decoration: none;
+            display: block;
+            color: inherit;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .grid-item-link:hover {
+            transform: translateY(-12px);
+        }
+
+        .grid-item-link:active {
+            transform: translateY(-6px);
+        }
+
+        /* 修改原有的 grid-item，增加箭頭空間 */
+        .grid-item {
+            padding-bottom: 60px; /* 為箭頭留空間 */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 光澤效果 */
+        .grid-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .grid-item-link:hover .grid-item::before {
+            opacity: 1;
+        }
+
+        .grid-item-link:hover .grid-item {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 
+                0 15px 45px rgba(0, 0, 0, 0.35),
+                0 0 30px rgba(255, 255, 255, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .grid-item-link:hover .grid-item h3 {
+            text-shadow: 0 4px 20px rgba(255, 255, 255, 0.4);
+            transform: translateX(5px);
+        }
+
+        .grid-item-link:hover .grid-item p {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* 箭頭圖示 */
+        .card-arrow {
+            position: absolute;
+            bottom: 20px;
+            right: 25px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.9);
+            opacity: 0;
+            transform: translateX(-15px);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .grid-item-link:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* 脈衝光效果 */
+        @keyframes pulseGlow {
+            0%, 100% { 
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            }
+            50% { 
+                box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        .grid-item-link:hover .grid-item {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        /* ==================== 🎯 新增結束 ==================== */
+
         .grid-item h3 {
             color: white;
             font-size: 1.5rem;
@@ -304,37 +401,63 @@
             <a href="#" class="btn"> 倒空自己 開始探索  </a>
         </div>
   
- 
-
-
-        <!-- 內容區域 -->
+         <!-- 內容區域 -->
         <section class="glass-card fade-in">
             <h2 style="color: white; font-size: 2rem; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">分類資訊</h2>
             <div class="grid">
-                <div class="grid-item">
-                    <h3>🎨 流動漸變</h3>
-                    <p>動態的背景漸變效果，營造出液態玻璃的獨特視覺體驗</p>
-                </div>
-                <div class="grid-item">
-                    <h3>💎 玻璃擬態</h3>
-                    <p>強烈的模糊和透明效果，配合柔和的陰影和光澤</p>
-                </div>
-                <div class="grid-item">
-                    <h3>🌊 波浪動畫</h3>
-                    <p>背景波浪動畫增添了流動感和生命力</p>
-                </div>    
-                  <div class="grid-item">
-                    <h3>📱 多端自適應</h3>
-                    <p>從手機到桌機，自動調整版面與字級，維持舒適流暢的閱讀體驗</p>
-                </div>    
-                 <div class="grid-item">
-                    <h3>🧩 模組化架構</h3>
-                    <p>以積木式元件構建頁面，讓導覽列、卡片與按鈕都能快速複用與擴充</p>
-                </div>    
-                 <div class="grid-item">
-                    <h3>🎯 聚焦內容體驗</h3>
-                    <p>高對比排版與適當留白，將重點文字與行動按鈕自然導入視線中心</p>
-                </div>
+                <!-- 1. 流動漸變 -->
+                <a href="#flow-gradient" class="grid-item-link">
+                    <div class="grid-item">
+                        <h3>🎨 流動漸變</h3>
+                        <p>動態的背景漸變效果，營造出液態玻璃的獨特視覺體驗</p>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </a>
+
+                <!-- 2. 玻璃擬態 -->
+                <a href="#glass-morphism" class="grid-item-link">
+                    <div class="grid-item">
+                        <h3>💎 玻璃擬態</h3>
+                        <p>強烈的模糊和透明效果，配合柔和的陰影和光澤</p>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </a>
+
+                <!-- 3. 波浪動畫 -->
+                <a href="#wave-animation" class="grid-item-link">
+                    <div class="grid-item">
+                        <h3>🌊 波浪動畫</h3>
+                        <p>背景波浪動畫增添了流動感和生命力</p>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </a>
+
+                <!-- 4. 多端自適應 -->
+                <a href="#responsive-design" class="grid-item-link">
+                    <div class="grid-item">
+                        <h3>📱 多端自適應</h3>
+                        <p>從手機到桌機，自動調整版面與字級，維持舒適流暢的閱讀體驗</p>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </a>
+
+                <!-- 5. 模組化架構 -->
+                <a href="#modular-architecture" class="grid-item-link">
+                    <div class="grid-item">
+                        <h3>🧩 模組化架構</h3>
+                        <p>以積木式元件構建頁面，讓導覽列、卡片與按鈕都能快速複用與擴充</p>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </a>
+
+                <!-- 6. 聚焦內容體驗 -->
+                <a href="#content-focus" class="grid-item-link">
+                    <div class="grid-item">
+                        <h3>🎯 聚焦內容體驗</h3>
+                        <p>高對比排版與適當留白，將重點文字與行動按鈕自然導入視線中心</p>
+                        <span class="card-arrow">→</span>
+                    </div>
+                </a>
             </div>
         </section>
 
