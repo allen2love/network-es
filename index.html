@@ -303,27 +303,7 @@
             <p> 不需要撐得完美 要懂得欣賞不完美 </p>
             <a href="#" class="btn"> 倒空自己 開始探索  </a>
         </div>
-  <!-- 關鍵字搜尋引擎對話框：HTML + CSS + JS -->
-<section class="search-section">
-  <h2>🔍 關鍵字搜尋引擎</h2>
-  <p>輸入關鍵字，在愛倫 AI 小宇宙中探索你感興趣的內容。</p>
-
-  <form class="search-box" id="site-search-form" action="#" method="get">
-    <label for="site-search" class="visually-hidden">搜尋關鍵字</label>
-    <input
-      type="search"
-      id="site-search"
-      name="q"
-      class="search-input"
-      placeholder="試著輸入：網路基礎、架構設計、SSO..."
-      autocomplete="off"
-      required
-    />
-    <button type="submit" class="search-button">開始探索</button>
-  </form>
-
-  <div id="search-result" class="search-result"></div>
-</section>
+ 
 
 <style>
   .search-section {
@@ -446,66 +426,11 @@
 </style>
 
 <script>
-  // 示範用：可依你頁面實際內容調整
-  const searchableItems = [
-    {
-      title: "網路基礎概念",
-      text: "認識網路架構與基本協定，打好技術底層。",
-      tags: ["網路基礎", "network", "協定"]
-    },
-    {
-      title: "架構設計思維",
-      text: "從使用者體驗反推後端架構，打造穩定又好維運的系統。",
-      tags: ["架構設計", "architecture", "系統"]
-    },
-    {
-      title: "SSO 單一登入",
-      text: "讓多系統之間只需一次登入，提升安全性與使用流暢度。",
-      tags: ["SSO", "單一登入", "sso"]
-    }
-  ];
-
-  const form = document.getElementById("site-search-form");
-  const input = document.getElementById("site-search");
-  const resultBox = document.getElementById("search-result");
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const keyword = input.value.trim().toLowerCase();
-    if (!keyword) return;
-
-    const matched = searchableItems.filter((item) => {
-      const haystack =
-        (item.title + " " + item.text + " " + item.tags.join(" ")).toLowerCase();
-      return haystack.includes(keyword);
-    });
-
-    if (matched.length === 0) {
-      resultBox.innerHTML =
-        '<div class="search-result-item">找不到與「<strong>' +
-        keyword +
-        "</strong>」相關的內容，可以換個關鍵字試試。</div>";
-      return;
-    }
-
-    resultBox.innerHTML = matched
-      .map(
-        (item) =>
-          '<div class="search-result-item">' +
-          "<strong>" +
-          item.title +
-          "</strong><br>" +
-          item.text +
-          "</div>"
-      )
-      .join("");
-  });
-</script>
 
 
         <!-- 內容區域 -->
         <section class="glass-card fade-in">
-            <h2 style="color: white; font-size: 2rem; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">主要特色</h2>
+            <h2 style="color: white; font-size: 2rem; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">分類資訊</h2>
             <div class="grid">
                 <div class="grid-item">
                     <h3>🎨 流動漸變</h3>
