@@ -280,127 +280,7 @@
 
         .fade-in:nth-child(1) { animation-delay: 0.1s; }
         .fade-in:nth-child(2) { animation-delay: 0.2s; }
-        .fade-in:nth-child(3) { animation-delay: 0.3s; }    
-        .search-section {
-    margin: 40px 0;
-    padding: 24px 20px 28px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
-    text-align: center;
-}
-
-.search-section h2 {
-    margin-bottom: 8px;
-    font-size: 1.5rem;
-    color: #fff;
-}
-
-.search-section p {
-    margin-bottom: 18px;
-    opacity: 0.9;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.search-box {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.search-input {
-    flex: 1 1 220px;
-    min-width: 0;
-    padding: 10px 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(0, 0, 0, 0.35);
-    color: #fff;
-    outline: none;
-    font-size: 0.95rem;
-}
-
-.search-input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.search-input:focus {
-    border-color: #7cf5ff;
-    box-shadow: 0 0 0 1px rgba(124, 245, 255, 0.6);
-}
-
-.search-button {
-    padding: 10px 22px;
-    border-radius: 999px;
-    border: none;
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #0b1020;
-    background: linear-gradient(135deg, #7cf5ff, #ff9ef8);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
-}
-
-.search-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
-    filter: brightness(1.05);
-}
-
-.search-button:active {
-    transform: translateY(0);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
-}
-
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-.search-result {
-    margin-top: 16px;
-    font-size: 0.9rem;
-    text-align: left;
-    color: #fff;
-}
-
-.search-result-item {
-    padding: 8px 10px;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 6px;
-}
-
-.search-result-item strong {
-    color: #7cf5ff;
-}
-
-@media (max-width: 600px) {
-    .search-section {
-        margin: 24px 0;
-        padding: 18px 14px 22px;
-    }
-
-    .search-button {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
@@ -423,8 +303,8 @@
             <p> 不需要撐得完美 要懂得欣賞不完美 </p>
             <a href="#" class="btn"> 倒空自己 開始探索  </a>
         </div>
- <!-- 關鍵字搜尋引擎對話框 -->
-<section class="glass-card fade-in search-section">
+  <!-- 關鍵字搜尋引擎對話框：HTML + CSS + JS -->
+<section class="search-section">
   <h2>🔍 關鍵字搜尋引擎</h2>
   <p>輸入關鍵字，在愛倫 AI 小宇宙中探索你感興趣的內容。</p>
 
@@ -445,56 +325,128 @@
   <div id="search-result" class="search-result"></div>
 </section>
 
+<style>
+  .search-section {
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 24px 20px 28px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+    text-align: center;
+  }
 
-        <!-- 內容區域 -->
-        <section class="glass-card fade-in">
-            <h2 style="color: white; font-size: 2rem; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">主要特色</h2>
-            <div class="grid">
-                <div class="grid-item">
-                    <h3>🎨 流動漸變</h3>
-                    <p>動態的背景漸變效果，營造出液態玻璃的獨特視覺體驗</p>
-                </div>
-                <div class="grid-item">
-                    <h3>💎 玻璃擬態</h3>
-                    <p>強烈的模糊和透明效果，配合柔和的陰影和光澤</p>
-                </div>
-                <div class="grid-item">
-                    <h3>🌊 波浪動畫</h3>
-                    <p>背景波浪動畫增添了流動感和生命力</p>
-                </div>    
-                  <div class="grid-item">
-                    <h3>📱 多端自適應</h3>
-                    <p>從手機到桌機，自動調整版面與字級，維持舒適流暢的閱讀體驗</p>
-                </div>    
-                 <div class="grid-item">
-                    <h3>🧩 模組化架構</h3>
-                    <p>以積木式元件構建頁面，讓導覽列、卡片與按鈕都能快速複用與擴充</p>
-                </div>    
-                 <div class="grid-item">
-                    <h3>🎯 聚焦內容體驗</h3>
-                    <p>高對比排版與適當留白，將重點文字與行動按鈕自然導入視線中心</p>
-                </div>
-            </div>
-        </section>
+  .search-section h2 {
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+  }
 
-     
-        <!-- 示例卡片 -->
-        <section class="glass-card fade-in">
-            <h2 style="color: white; font-size: 2rem; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">內容區域示例</h2>
-            <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.8; font-size: 1.1rem;">
-                這是一個乾淨的網頁框架，所有具體內容已被移除。你可以在這裡添加任何你需要的內容。
-                液態玻璃效果提供了獨特的視覺吸引力，同時保持了良好的可讀性。
-            </p>
-        </section>
+  .search-section p {
+    margin-bottom: 18px;
+    opacity: 0.9;
+  }
 
-        <!-- 頁尾 -->
-        <footer class="fade-in">
-            <p>© 2025 Allen Framework | 愛倫AI小宇宙</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">allen@hlc.edu.tw</p>
-        </footer>
-    </div>    
-    <script>
-  // 可依實際內容調整
+  .search-box {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .search-input {
+    flex: 1 1 220px;
+    min-width: 0;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    outline: none;
+    font-size: 0.95rem;
+  }
+
+  .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .search-input:focus {
+    border-color: #7cf5ff;
+    box-shadow: 0 0 0 1px rgba(124, 245, 255, 0.6);
+  }
+
+  .search-button {
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0b1020;
+    background: linear-gradient(135deg, #7cf5ff, #ff9ef8);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+  }
+
+  .search-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+    filter: brightness(1.05);
+  }
+
+  .search-button:active {
+    transform: translateY(0);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .search-result {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .search-result-item {
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 6px;
+  }
+
+  .search-result-item strong {
+    color: #7cf5ff;
+  }
+
+  @media (max-width: 600px) {
+    .search-section {
+      margin: 24px 16px;
+      padding: 18px 14px 22px;
+    }
+
+    .search-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  // 示範用：可依你頁面實際內容調整
   const searchableItems = [
     {
       title: "網路基礎概念",
@@ -550,5 +502,53 @@
   });
 </script>
 
+
+        <!-- 內容區域 -->
+        <section class="glass-card fade-in">
+            <h2 style="color: white; font-size: 2rem; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">主要特色</h2>
+            <div class="grid">
+                <div class="grid-item">
+                    <h3>🎨 流動漸變</h3>
+                    <p>動態的背景漸變效果，營造出液態玻璃的獨特視覺體驗</p>
+                </div>
+                <div class="grid-item">
+                    <h3>💎 玻璃擬態</h3>
+                    <p>強烈的模糊和透明效果，配合柔和的陰影和光澤</p>
+                </div>
+                <div class="grid-item">
+                    <h3>🌊 波浪動畫</h3>
+                    <p>背景波浪動畫增添了流動感和生命力</p>
+                </div>    
+                  <div class="grid-item">
+                    <h3>📱 多端自適應</h3>
+                    <p>從手機到桌機，自動調整版面與字級，維持舒適流暢的閱讀體驗</p>
+                </div>    
+                 <div class="grid-item">
+                    <h3>🧩 模組化架構</h3>
+                    <p>以積木式元件構建頁面，讓導覽列、卡片與按鈕都能快速複用與擴充</p>
+                </div>    
+                 <div class="grid-item">
+                    <h3>🎯 聚焦內容體驗</h3>
+                    <p>高對比排版與適當留白，將重點文字與行動按鈕自然導入視線中心</p>
+                </div>
+            </div>
+        </section>
+
+     
+        <!-- 示例卡片 -->
+        <section class="glass-card fade-in">
+            <h2 style="color: white; font-size: 2rem; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">內容區域示例</h2>
+            <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.8; font-size: 1.1rem;">
+                這是一個乾淨的網頁框架，所有具體內容已被移除。你可以在這裡添加任何你需要的內容。
+                液態玻璃效果提供了獨特的視覺吸引力，同時保持了良好的可讀性。
+            </p>
+        </section>
+
+        <!-- 頁尾 -->
+        <footer class="fade-in">
+            <p>© 2025 Allen Framework | 愛倫AI小宇宙</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">allen@hlc.edu.tw</p>
+        </footer>
+    </div>
 </body>
 </html>
