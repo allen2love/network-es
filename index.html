@@ -306,25 +306,24 @@
   <!-- 關鍵字搜尋引擎對話框：HTML + CSS + JS -->
 <section class="search-section">
   <h2>🔍 關鍵字搜尋引擎</h2>
-  <p>輸入關鍵字，在愛倫 AI 小宇宙的主要特色中快速找到你想了解的項目。</p>
+  <p>輸入關鍵字，在愛倫 AI 小宇宙中探索你感興趣的內容。</p>
 
-  <form class="search-box" id="feature-search-form" action="#" method="get">
-    <label for="feature-search" class="visually-hidden">搜尋關鍵字</label>
+  <form class="search-box" id="site-search-form" action="#" method="get">
+    <label for="site-search" class="visually-hidden">搜尋關鍵字</label>
     <input
       type="search"
-      id="feature-search"
+      id="site-search"
       name="q"
       class="search-input"
-      placeholder="試著輸入：流動漸變、玻璃擬態、RWD..."
+      placeholder="試著輸入：網路基礎、架構設計、SSO..."
       autocomplete="off"
       required
     />
     <button type="submit" class="search-button">開始探索</button>
   </form>
 
-  <div id="feature-search-result" class="search-result"></div>
+  <div id="search-result" class="search-result"></div>
 </section>
-
 
 <style>
   .search-section {
@@ -502,55 +501,11 @@
       .join("");
   });
 </script>
-<script>
-  const featureForm = document.getElementById("feature-search-form");
-  const featureInput = document.getElementById("feature-search");
-  const featureResultBox = document.getElementById("feature-search-result");
-
-  if (featureForm && featureInput && featureResultBox && Array.isArray(searchableItems)) {
-    featureForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const keyword = featureInput.value.trim().toLowerCase();
-      if (!keyword) return;
-
-      const matched = searchableItems.filter((item) => {
-        const haystack = (
-          item.title +
-          " " +
-          item.text +
-          " " +
-          item.tags.join(" ")
-        ).toLowerCase();
-        return haystack.includes(keyword);
-      });
-
-      if (matched.length === 0) {
-        featureResultBox.innerHTML =
-          '<div class="search-result-item">找不到與「<strong>' +
-          keyword +
-          "</strong>」相關的主要特色，可以試試輸入：流動、玻璃、動畫、RWD…</div>";
-        return;
-      }
-
-      featureResultBox.innerHTML = matched
-        .map(
-          (item) =>
-            '<div class="search-result-item">' +
-            "<strong>" +
-            item.title +
-            "</strong><br>" +
-            item.text +
-            "</div>"
-        )
-        .join("");
-    });
-  }
-</script>
 
 
         <!-- 內容區域 -->
         <section class="glass-card fade-in">
-            <h2 style="color: white; font-size: 2rem; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">分類資訊</h2>
+            <h2 style="color: white; font-size: 2rem; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">主要特色</h2>
             <div class="grid">
                 <div class="grid-item">
                     <h3>🎨 流動漸變</h3>
@@ -594,41 +549,6 @@
             <p>© 2025 Allen Framework | 愛倫AI小宇宙</p>
             <p style="margin-top: 10px; font-size: 0.9rem;">allen@hlc.edu.tw</p>
         </footer>
-    </div>    
-    <script>
-  const searchableItems = [
-    {
-      title: "流動漸變",
-      text: "動態的背景漸變效果，營造出液態玻璃的獨特視覺體驗。",
-      tags: ["流動漸變", "背景漸變", "液態玻璃", "視覺效果"]
-    },
-    {
-      title: "玻璃擬態",
-      text: "強烈的模糊和透明效果，配合柔和的陰影和光澤。",
-      tags: ["玻璃擬態", "模糊", "透明效果", "陰影", "光澤"]
-    },
-    {
-      title: "波浪動畫",
-      text: "背景波浪動畫增添了流動感和生命力。",
-      tags: ["波浪動畫", "動畫", "流動感", "動態背景"]
-    },
-    {
-      title: "多端自適應",
-      text: "從手機到桌機，自動調整版面與字級，維持舒適流暢的閱讀體驗。",
-      tags: ["多端自適應", "響應式", "RWD", "手機", "桌機", "閱讀體驗"]
-    },
-    {
-      title: "模組化架構",
-      text: "以積木式元件構建頁面，讓導覽列、卡片與按鈕都能快速複用與擴充。",
-      tags: ["模組化架構", "積木式元件", "導覽列", "卡片", "按鈕", "擴充"]
-    },
-    {
-      title: "聚焦內容體驗",
-      text: "高對比排版與適當留白，將重點文字與行動按鈕自然導入視線中心。",
-      tags: ["內容體驗", "高對比排版", "留白", "行動按鈕", "焦點"]
-    }
-  ];
-</script>
-
+    </div>
 </body>
 </html>
