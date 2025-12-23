@@ -29,123 +29,6 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-.search-section {
-  max-width: 720px;
-  margin: 40px auto;
-  padding: 24px 20px 28px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
-  text-align: center;
-}
-
-.search-section h2 {
-  margin-bottom: 8px;
-  font-size: 1.5rem;
-}
-
-.search-section p {
-  margin-bottom: 18px;
-  opacity: 0.9;
-}
-
-.search-box {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.search-input {
-  flex: 1 1 220px;
-  min-width: 0;
-  padding: 10px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(0, 0, 0, 0.35);
-  color: #fff;
-  outline: none;
-  font-size: 0.95rem;
-}
-
-.search-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.search-input:focus {
-  border-color: #7cf5ff;
-  box-shadow: 0 0 0 1px rgba(124, 245, 255, 0.6);
-}
-
-.search-button {
-  padding: 10px 22px;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #0b1020;
-  background: linear-gradient(135deg, #7cf5ff, #ff9ef8);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
-}
-
-.search-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
-  filter: brightness(1.05);
-}
-
-.search-button:active {
-  transform: translateY(0);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.search-result {
-  margin-top: 16px;
-  font-size: 0.9rem;
-  text-align: left;
-}
-
-.search-result-item {
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 6px;
-}
-
-.search-result-item strong {
-  color: #7cf5ff;
-}
-
-@media (max-width: 600px) {
-  .search-section {
-    margin: 24px 16px;
-    padding: 18px 14px 22px;
-  }
-
-  .search-button {
-    width: 100%;
-    justify-content: center;
-  }
-}
 
         /* 液態波浪背景層 */
         .liquid-bg {
@@ -420,9 +303,10 @@
             <p> 不需要撐得完美 要懂得欣賞不完美 </p>
             <a href="#" class="btn"> 倒空自己 開始探索  </a>
         </div>
-  <section class="search-section">
+  <!-- 關鍵字搜尋引擎對話框：HTML + CSS + JS -->
+<section class="search-section">
   <h2>🔍 關鍵字搜尋引擎</h2>
-  <p>輸入關鍵字，在 Allen 網路與 SSO 教學筆記中快速找到對應主題。</p>
+  <p>輸入關鍵字，在愛倫 AI 小宇宙中探索你感興趣的內容。</p>
 
   <form class="search-box" id="site-search-form" action="#" method="get">
     <label for="site-search" class="visually-hidden">搜尋關鍵字</label>
@@ -440,6 +324,183 @@
 
   <div id="search-result" class="search-result"></div>
 </section>
+
+<style>
+  .search-section {
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 24px 20px 28px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+    text-align: center;
+  }
+
+  .search-section h2 {
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+  }
+
+  .search-section p {
+    margin-bottom: 18px;
+    opacity: 0.9;
+  }
+
+  .search-box {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .search-input {
+    flex: 1 1 220px;
+    min-width: 0;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    outline: none;
+    font-size: 0.95rem;
+  }
+
+  .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .search-input:focus {
+    border-color: #7cf5ff;
+    box-shadow: 0 0 0 1px rgba(124, 245, 255, 0.6);
+  }
+
+  .search-button {
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0b1020;
+    background: linear-gradient(135deg, #7cf5ff, #ff9ef8);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+  }
+
+  .search-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+    filter: brightness(1.05);
+  }
+
+  .search-button:active {
+    transform: translateY(0);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .search-result {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .search-result-item {
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 6px;
+  }
+
+  .search-result-item strong {
+    color: #7cf5ff;
+  }
+
+  @media (max-width: 600px) {
+    .search-section {
+      margin: 24px 16px;
+      padding: 18px 14px 22px;
+    }
+
+    .search-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  // 示範用：可依你頁面實際內容調整
+  const searchableItems = [
+    {
+      title: "網路基礎概念",
+      text: "認識網路架構與基本協定，打好技術底層。",
+      tags: ["網路基礎", "network", "協定"]
+    },
+    {
+      title: "架構設計思維",
+      text: "從使用者體驗反推後端架構，打造穩定又好維運的系統。",
+      tags: ["架構設計", "architecture", "系統"]
+    },
+    {
+      title: "SSO 單一登入",
+      text: "讓多系統之間只需一次登入，提升安全性與使用流暢度。",
+      tags: ["SSO", "單一登入", "sso"]
+    }
+  ];
+
+  const form = document.getElementById("site-search-form");
+  const input = document.getElementById("site-search");
+  const resultBox = document.getElementById("search-result");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const keyword = input.value.trim().toLowerCase();
+    if (!keyword) return;
+
+    const matched = searchableItems.filter((item) => {
+      const haystack =
+        (item.title + " " + item.text + " " + item.tags.join(" ")).toLowerCase();
+      return haystack.includes(keyword);
+    });
+
+    if (matched.length === 0) {
+      resultBox.innerHTML =
+        '<div class="search-result-item">找不到與「<strong>' +
+        keyword +
+        "</strong>」相關的內容，可以換個關鍵字試試。</div>";
+      return;
+    }
+
+    resultBox.innerHTML = matched
+      .map(
+        (item) =>
+          '<div class="search-result-item">' +
+          "<strong>" +
+          item.title +
+          "</strong><br>" +
+          item.text +
+          "</div>"
+      )
+      .join("");
+  });
+</script>
 
 
         <!-- 內容區域 -->
@@ -488,76 +549,6 @@
             <p>© 2025 Allen Framework | 愛倫AI小宇宙</p>
             <p style="margin-top: 10px; font-size: 0.9rem;">allen@hlc.edu.tw</p>
         </footer>
-    </div>    
-    <script>
-  // 站內主題索引：請依實際內容增減
-  const searchableItems = [
-    {
-      title: "網路基礎概念",
-      text: "介紹 OSI 七層、TCP/IP 模型與常見網路設備，建立網路概念地圖。",
-      tags: ["網路基礎", "network", "OSI", "TCP/IP"]
-    },
-    {
-      title: "網路架構設計",
-      text: "從使用情境出發設計區網與對外連線的拓樸，考量擴充性與可靠度。",
-      tags: ["架構設計", "拓樸", "LAN", "WAN"]
-    },
-    {
-      title: "SSO 單一登入機制",
-      text: "說明 SSO 的運作流程、常見協定與在教育場域的應用案例。",
-      tags: ["SSO", "單一登入", "認證", "授權"]
-    },
-    {
-      title: "網路安全與存取控制",
-      text: "簡介防火牆、VPN、ACL 等基本安全機制與實務考量。",
-      tags: ["網路安全", "防火牆", "VPN", "ACL"]
-    }
-    // 之後可繼續加：例如 DNS、HTTP、雲服務等主題
-  ];    
-        <script>
-  const form = document.getElementById("site-search-form");
-  const input = document.getElementById("site-search");
-  const resultBox = document.getElementById("search-result");
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const keyword = input.value.trim().toLowerCase();
-    if (!keyword) return;
-
-    const matched = searchableItems.filter((item) => {
-      const haystack = (
-        item.title +
-        " " +
-        item.text +
-        " " +
-        item.tags.join(" ")
-      ).toLowerCase();
-      return haystack.includes(keyword);
-    });
-
-    if (matched.length === 0) {
-      resultBox.innerHTML =
-        '<div class="search-result-item">找不到與「<strong>' +
-        keyword +
-        "</strong>」相關的內容，可以換個關鍵字試試。</div>";
-      return;
-    }
-
-    resultBox.innerHTML = matched
-      .map(
-        (item) =>
-          '<div class="search-result-item">' +
-          "<strong>" +
-          item.title +
-          "</strong><br>" +
-          item.text +
-          "</div>"
-      )
-      .join("");
-  });
-</script>
-
-</script>
-
+    </div>
 </body>
 </html>
