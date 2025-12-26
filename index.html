@@ -6,7 +6,9 @@
     <title>愛倫Ai小宇宙 | 測試網站框架</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">    
+     <!-- 🆕 新增馬善政行書字型 -->
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -150,12 +152,14 @@
         }
 
         .hero h2 {
+  font-family: 'Ma Shan Zheng', 'Noto Sans TC', cursive; /* 🆕 改為馬善政行書 */
             color: white;
             font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 20px;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             animation: floatText 3s ease-in-out infinite;
+            letter-spacing: 0.05em; /* 🆕 增加字距讓書法更美觀 */
         }
 
         @keyframes floatText {
@@ -164,10 +168,12 @@
         }
 
         .hero p {
+            font-family: 'Ma Shan Zheng', 'Noto Sans TC', cursive; /* 🆕 副標題也改為書法字型 */
             color: rgba(255, 255, 255, 0.9);
             font-size: 1.3rem;
             margin-bottom: 40px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.08em; /* 🆕 增加字距 */
         }
 
         /* 按鈕樣式 */
