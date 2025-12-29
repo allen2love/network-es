@@ -471,15 +471,22 @@
                     </div>
                 </a>
 
-                <!-- 6. 聚焦內容體驗 -->
+                <!-- 6. 聚焦內容體驗 
                 <a href="ppt-work.html" class="grid-item-link">
                     <div class="grid-item">
                         <h3>📚️🎯 報告作業</h3>
                         <p>蒐集資料、分析工具呈現數據發現</p>
                         <span class="card-arrow">→</span>
                     </div>
-                </a>
-
+                </a>   -->
+                <!-- 改成這樣 👇 -->
+<a href="javascript:void(0)" class="grid-item-link" onclick="checkPassword()">
+    <div class="grid-item">
+        <h3>📊 🔒 報告作業</h3>
+        <p>蒐集資料、分析工具呈現數據發現（需要密碼）</p>
+        <span class="card-arrow">→</span>
+    </div>
+</a>
                 <!-- 第三排（新增） -->
                 
                 <!-- 7. 效能優化 -->
@@ -527,6 +534,281 @@
             <p>© 2025 Allen Framework | 艾倫Ai小宇宙 | All Rights Reserved. </p>
             <p style="margin-top: 10px; font-size: 0.9rem;">allen@hlc.edu.tw</p>
         </footer>
+    </div>    
+        <!-- ==================== 🔒 密碼驗證系統（SHA-256 加密版） ==================== -->
+    
+    <!-- 密碼輸入彈窗 HTML -->
+    <div id="passwordModal" class="password-modal">
+        <div class="password-modal-content">
+            <div class="password-header">
+                <h2>🔒 密碼驗證</h2>
+                <p>請輸入密碼以查看報告作業內容</p>
+            </div>
+            <div class="password-body">
+                <input 
+                    type="password" 
+                    id="passwordInput" 
+                    class="password-input" 
+                    placeholder="請輸入密碼"
+                    autocomplete="off"
+                >
+                <div class="password-error" id="passwordError"></div>
+            </div>
+            <div class="password-footer">
+                <button class="btn-cancel" onclick="closePasswordModal()">取消</button>
+                <button class="btn-submit" onclick="submitPassword()">確認</button>
+            </div>
+        </div>
     </div>
+
+    <!-- CSS 樣式 -->
+    <style>
+        /* 密碼彈窗樣式 */
+        .password-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .password-modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: slideUp 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .password-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .password-header h2 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .password-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .password-body {
+            margin-bottom: 25px;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+        
+        .password-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .password-error {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            min-height: 20px;
+        }
+        
+        .password-footer {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .btn-cancel, .btn-submit {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-cancel {
+            background: rgba(0, 0, 0, 0.05);
+            color: #666;
+        }
+        
+        .btn-cancel:hover {
+            background: rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        .shake {
+            animation: shake 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .password-modal-content {
+                padding: 30px 20px;
+            }
+            
+            .password-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .password-input {
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <!-- JavaScript 密碼驗證程式 -->
+    <script>
+        // 🔑 SHA-256 加密後的密碼（請用下方工具生成）
+        // 以下是 "allen2025" 的 SHA-256 hash
+        const HASHED_PASSWORD = '49520af150349078384f16e0df22ff772bbffd7003a125bdc3223395fbf4379a';
+        
+        // 目標頁面
+        const TARGET_URL = 'ppt-work.html';  // 請改成你的報告作業頁面網址
+        
+        // SHA-256 加密函數
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        }
+        
+        // 開啟密碼輸入視窗
+        function checkPassword() {
+            const modal = document.getElementById('passwordModal');
+            const input = document.getElementById('passwordInput');
+            const error = document.getElementById('passwordError');
+            
+            modal.style.display = 'flex';
+            input.value = '';
+            error.textContent = '';
+            
+            setTimeout(() => input.focus(), 100);
+            
+            // 按 Enter 可以送出
+            input.onkeypress = function(e) {
+                if (e.key === 'Enter') {
+                    submitPassword();
+                }
+            };
+        }
+        
+        // 關閉密碼視窗
+        function closePasswordModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+        }
+        
+        // 驗證密碼（SHA-256 加密比對）
+        async function submitPassword() {
+            const input = document.getElementById('passwordInput');
+            const error = document.getElementById('passwordError');
+            const password = input.value;
+            
+            if (!password) {
+                error.textContent = '⚠️ 請輸入密碼';
+                error.style.color = '#f59e0b';
+                return;
+            }
+            
+            // 將輸入的密碼進行 SHA-256 加密
+            const hashedInput = await hashPassword(password);
+            
+            // 比對加密後的密碼
+            if (hashedInput === HASHED_PASSWORD) {
+                error.textContent = '✓ 密碼正確，正在跳轉...';
+                error.style.color = '#4ade80';
+                
+                setTimeout(() => {
+                    window.location.href = TARGET_URL;
+                }, 500);
+            } else {
+                error.textContent = '✗ 密碼錯誤，請重試';
+                error.style.color = '#f87171';
+                input.value = '';
+                input.focus();
+                
+                // 輸入框震動效果
+                input.classList.add('shake');
+                setTimeout(() => {
+                    input.classList.remove('shake');
+                }, 500);
+            }
+        }
+        
+        // 點擊背景關閉視窗
+        window.onclick = function(event) {
+            const modal = document.getElementById('passwordModal');
+            if (event.target === modal) {
+                closePasswordModal();
+            }
+        };
+    </script>
+
+</body>
+</html>
+
 </body>
 </html>
