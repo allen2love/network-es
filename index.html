@@ -164,7 +164,7 @@
         /* Hero區域 */
         .hero {
             text-align: center;
-            padding: 80px 20px;
+            padding: 50px 20px;
         }
 
         /* 🎯 Hero 主標題改用 Zen Old Mincho */
@@ -173,7 +173,7 @@
     color: white;
     font-size: 3.5rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     letter-spacing: 0.08em;
     
     /* 🆕 多層次陰影增加立體感 */
@@ -195,8 +195,25 @@
           font-family: 'Zen Old Mincho', serif;
     color: rgba(255, 255, 255, 0.95);
     font-size: 1.3rem;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     letter-spacing: 0.05em;
+    /* 響應式調整 */
+@media (max-width: 768px) {
+    .hero {
+        padding: 40px 15px;
+    }
+    
+    .hero h2 {
+        font-size: 2.5rem;
+        margin-bottom: 12px;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+    }
+}
     
     /* 🆕 柔和的陰影 */
     text-shadow: 
