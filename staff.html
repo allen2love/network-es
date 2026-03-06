@@ -1,228 +1,488 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>花蓮縣政府教育處 - 人事異動比對報告</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #2563eb;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --border: #e2e8f0;
-        }
+  <meta charset="UTF-8">
+  <title>花蓮縣政府教育處 - 人事異動比對報告</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <!-- 與首頁一致的字型設定 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding: 40px 20px;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+    /* 與 index.html 一致的背景設定（略微保守調整用在公文頁面） */
+    body {
+      font-family: 'Poppins', 'Noto Sans TC', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+      background-size: 400% 400%;
+      animation: liquidGradient 15s ease infinite;
+      position: relative;
+      color: #0f172a;
+    }
 
-        header {
-            margin-bottom: 30px;
-            text-align: center;
-        }
+    @keyframes liquidGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        header h1 {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
+    /* 液態波浪背景層（沿用首頁） */
+    .liquid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
 
-        header p {
-            color: var(--text-muted);
-        }
+    .wave {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.12) 0%, transparent 70%);
+      border-radius: 45%;
+      animation: liquidWave 20s infinite linear;
+    }
 
-        /* 統計卡片 */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
+    .wave:nth-child(1) {
+      top: -50%;
+      left: -50%;
+      animation-duration: 25s;
+    }
 
-        .stat-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            border-top: 4px solid var(--primary-color);
-            text-align: center;
-        }
+    .wave:nth-child(2) {
+      top: -60%;
+      right: -50%;
+      animation-duration: 20s;
+      animation-delay: -5s;
+    }
 
-        .stat-card.departure { border-top-color: var(--warning); }
-        .stat-card.arrival { border-top-color: var(--success); }
+    .wave:nth-child(3) {
+      bottom: -50%;
+      left: -40%;
+      animation-duration: 30s;
+      animation-delay: -10s;
+    }
 
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 10px 0;
-        }
+    @keyframes liquidWave {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+    /* 主容器（與首頁一致） */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 20px 40px;
+      position: relative;
+      z-index: 1;
+    }
 
-        /* 表格區塊 */
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    /* 頁首：改成玻璃感的報告標題條 */
+    header {
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 24px;
+      padding: 22px 26px;
+      margin-bottom: 28px;
+      border: 1.5px solid rgba(255, 255, 255, 0.28);
+      box-shadow:
+        0 12px 40px rgba(15, 23, 42, 0.55),
+        0 0 40px rgba(255, 255, 255, 0.16);
+      color: #e5e7eb;
+    }
 
-        .section-title::before {
-            content: "";
-            width: 4px;
-            height: 20px;
-            background: var(--primary-color);
-            border-radius: 2px;
-        }
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+      color: #f9fafb;
+      text-shadow:
+        0 2px 8px rgba(0,0,0,0.35),
+        0 0 18px rgba(129, 140, 248, 0.9);
+    }
 
-        .data-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-bottom: 40px;
-        }
+    header p {
+      font-size: 0.95rem;
+      color: rgba(226, 232, 240, 0.9);
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
+    /* 子標題小標籤 */
+    .sub-meta {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: rgba(226, 232, 240, 0.8);
+    }
 
-        th {
-            background-color: #f1f5f9;
-            padding: 15px;
-            font-weight: 500;
-            color: var(--text-muted);
-            border-bottom: 1px solid var(--border);
-        }
+    /* 統計卡片區放在一張玻璃卡裡 */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(22px) saturate(170%);
+      -webkit-backdrop-filter: blur(22px) saturate(170%);
+      border-radius: 26px;
+      border: 1.6px solid rgba(255, 255, 255, 0.40);
+      box-shadow:
+        0 10px 35px rgba(15, 23, 42, 0.45),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+      padding: 24px 24px 26px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        td {
-            padding: 15px;
-            border-bottom: 1px solid var(--border);
-        }
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -40%;
+      width: 180%;
+      height: 180%;
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.38) 0%, transparent 52%);
+      opacity: 0.22;
+      pointer-events: none;
+    }
 
-        tr:hover {
-            background-color: #f8fafc;
-        }
+    .glass-card-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
 
-        .badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
+    .glass-card-title h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
 
-        .badge-out { background: #fee2e2; color: #b91c1c; }
-        .badge-in { background: #dcfce7; color: #15803d; }
+    .glass-card-title span {
+      font-size: 0.85rem;
+      color: #64748b;
+    }
 
-        footer {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: 40px;
-        }
-    </style>
+    /* 原本 stats-grid 改為玻璃卡內的三欄 */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.62);
+      border-radius: 18px;
+      padding: 16px 16px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
+      text-align: center;
+    }
+
+    .stat-card.departure {
+      border-top: 4px solid #f59e0b;
+      background: linear-gradient(135deg, rgba(254,240,199,0.9), rgba(254, 243, 199, 0.3));
+    }
+
+    .stat-card.arrival {
+      border-top: 4px solid #10b981;
+      background: linear-gradient(135deg, rgba(209, 250, 229, 0.9), rgba(187, 247, 208, 0.3));
+    }
+
+    .stat-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 4px 0 2px;
+      color: #0f172a;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #475569;
+    }
+
+    /* 表格區塊外框也改成玻璃卡 */
+    .section-block {
+      margin-bottom: 26px;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #0f172a;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      background: linear-gradient(180deg, #4f46e5, #06b6d4);
+      border-radius: 999px;
+    }
+
+    .data-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.30),
+        0 0 40px rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    thead {
+      background: linear-gradient(90deg, #eef2ff, #e0f2fe);
+    }
+
+    th {
+      padding: 12px 16px;
+      font-weight: 500;
+      color: #475569;
+      border-bottom: 1px solid #d1d9e6;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #0f172a;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    tbody tr:hover {
+      background: rgba(219, 234, 254, 0.7);
+      transition: background 0.18s ease;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .badge-out {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .badge-in {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    footer {
+      text-align: center;
+      color: rgba(248, 250, 252, 0.9);
+      font-size: 0.9rem;
+      margin-top: 18px;
+      padding: 14px 18px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(15, 23, 42, 0.55);
+      border-radius: 20px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.6);
+    }
+
+    /* 響應式調整 */
+    @media (max-width: 768px) {
+      header {
+        padding: 18px 18px 16px;
+      }
+      header h1 {
+        font-size: 1.45rem;
+      }
+      .glass-card {
+        padding: 18px 16px 20px;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      th, td {
+        padding: 10px 10px;
+        font-size: 0.9rem;
+      }
+      .container {
+        padding: 22px 14px 28px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <!-- 液態背景 -->
+  <div class="liquid-bg">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
 
-<div class="container">
+  <div class="container">
     <header>
-        <h1>花蓮縣政府教育處人事異動比對報告</h1>
-        <p>比對版本：115-01 版 vs 115-03 版</p>
+      <h1>教育處人事異動比對報告</h1>
+      <p>版本比對：115-01 版 vs 115-03 版</p>
+      <div class="sub-meta">資料來源：座位分機名單 | 報表用途：內部管理參考</div>
     </header>
 
-    <div class="stats-grid">
+    <!-- 統計卡片玻璃區 -->
+    <div class="glass-card">
+      <div class="glass-card-title">
+        <h2>人事異動摘要</h2>
+        <span>僅出現在單一版本的名單統計</span>
+      </div>
+      <div class="stats-grid">
         <div class="stat-card">
-            <div class="stat-label">總變動人數</div>
-            <div class="stat-value">11</div>
-            <div class="stat-label">僅出現於單一版本</div>
+          <div class="stat-label">總變動人數</div>
+          <div class="stat-value">11</div>
+          <div class="stat-label">僅出現於單一版本</div>
         </div>
         <div class="stat-card departure">
-            <div class="stat-label">115-01 專有 (離職/異動)</div>
-            <div class="stat-value">5</div>
-            <div class="stat-label">人員已自名單移除</div>
+          <div class="stat-label">115-01 專有（離職／異動）</div>
+          <div class="stat-value">5</div>
+          <div class="stat-label">人員已自名單移除</div>
         </div>
         <div class="stat-card arrival">
-            <div class="stat-label">115-03 專有 (新進/異動)</div>
-            <div class="stat-value">6</div>
-            <div class="stat-label">人員已新增至名單</div>
+          <div class="stat-label">115-03 專有（新進／異動）</div>
+          <div class="stat-value">6</div>
+          <div class="stat-label">人員已新增至名單</div>
         </div>
+      </div>
     </div>
 
-    <div class="section-title">離職或異動人員 (僅於 115-01 版出現)</div>
-    <div class="data-card">
+    <!-- 離職／異動 -->
+    <div class="section-block">
+      <div class="section-title">離職或異動人員（僅於 115-01 版出現）</div>
+      <div class="data-card">
         <table>
-            <thead>
-                <tr>
-                    <th>姓名</th>
-                    <th>所屬科室</th>
-                    <th>職稱</th>
-                    <th>狀態</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>鄒逢益</td><td>教育設施科</td><td>科長</td><td><span class="badge badge-out">已離職/異動</span></td></tr>
-                <tr><td>翁泓文</td><td>課程教學科</td><td>人員</td><td><span class="badge badge-out">已離職/異動</span></td></tr>
-                <tr><td>蔡承叡</td><td>教網中心</td><td>人員</td><td><span class="badge badge-out">已離職/異動</span></td></tr>
-                <tr><td>黃思婷</td><td>教網中心</td><td>人員</td><td><span class="badge badge-out">已離職/異動</span></td></tr>
-                <tr><td>李佳恩</td><td>教網中心</td><td>人員</td><td><span class="badge badge-out">已離職/異動</span></td></tr>
-            </tbody>
+          <thead>
+            <tr>
+              <th>姓名</th>
+              <th>所屬科室</th>
+              <th>職稱</th>
+              <th>狀態</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>鄒逢益</td>
+              <td>教育設施科</td>
+              <td>科長</td>
+              <td><span class="badge badge-out">已離職／異動</span></td>
+            </tr>
+            <tr>
+              <td>翁泓文</td>
+              <td>課程教學科</td>
+              <td>人員</td>
+              <td><span class="badge badge-out">已離職／異動</span></td>
+            </tr>
+            <tr>
+              <td>蔡承叡</td>
+              <td>教網中心</td>
+              <td>人員</td>
+              <td><span class="badge badge-out">已離職／異動</span></td>
+            </tr>
+            <tr>
+              <td>黃思婷</td>
+              <td>教網中心</td>
+              <td>人員</td>
+              <td><span class="badge badge-out">已離職／異動</span></td>
+            </tr>
+            <tr>
+              <td>李佳恩</td>
+              <td>教網中心</td>
+              <td>人員</td>
+              <td><span class="badge badge-out">已離職／異動</span></td>
+            </tr>
+          </tbody>
         </table>
+      </div>
     </div>
 
-    <div class="section-title">新進或補位人員 (僅於 115-03 版出現)</div>
-    <div class="data-card">
+    <!-- 新進／補位 -->
+    <div class="section-block">
+      <div class="section-title">新進或補位人員（僅於 115-03 版出現）</div>
+      <div class="data-card">
         <table>
-            <thead>
-                <tr>
-                    <th>姓名</th>
-                    <th>所屬科室</th>
-                    <th>職稱</th>
-                    <th>狀態</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>尤沛鈞</td><td>終身教育科</td><td>科長</td><td><span class="badge badge-in">新進/補位</span></td></tr>
-                <tr><td>鄭淳衫</td><td>課程教學科</td><td>人員</td><td><span class="badge badge-in">新進/補位</span></td></tr>
-                <tr><td>黃沛汝</td><td>行政室</td><td>人員</td><td><span class="badge badge-in">新進/補位</span></td></tr>
-                <tr><td>李詠馨</td><td>學務管理科</td><td>人員</td><td><span class="badge badge-in">新進/補位</span></td></tr>
-                <tr><td>卓雅軒</td><td>體育保健科</td><td>人員</td><td><span class="badge badge-in">新進/補位</span></td></tr>
-                <tr><td>王蕙芩</td><td>數位學習中心</td><td>人員</td><td><span class="badge badge-in">新進/補位</span></td></tr>
-            </tbody>
+          <thead>
+            <tr>
+              <th>姓名</th>
+              <th>所屬科室</th>
+              <th>職稱</th>
+              <th>狀態</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>尤沛鈞</td>
+              <td>終身教育科</td>
+              <td>科長</td>
+              <td><span class="badge badge-in">新進／補位</span></td>
+            </tr>
+            <tr>
+              <td>鄭淳衫</td>
+              <td>課程教學科</td>
+              <td>人員</td>
+              <td><span class="badge badge-in">新進／補位</span></td>
+            </tr>
+            <tr>
+              <td>黃沛汝</td>
+              <td>行政室</td>
+              <td>人員</td>
+              <td><span class="badge badge-in">新進／補位</span></td>
+            </tr>
+            <tr>
+              <td>李詠馨</td>
+              <td>學務管理科</td>
+              <td>人員</td>
+              <td><span class="badge badge-in">新進／補位</span></td>
+            </tr>
+            <tr>
+              <td>卓雅軒</td>
+              <td>體育保健科</td>
+              <td>人員</td>
+              <td><span class="badge badge-in">新進／補位</span></td>
+            </tr>
+            <tr>
+              <td>王蕙芩</td>
+              <td>數位學習中心</td>
+              <td>人員</td>
+              <td><span class="badge badge-in">新進／補位</span></td>
+            </tr>
+          </tbody>
         </table>
+      </div>
     </div>
 
     <footer>
-        報告生成時間：2024年3月 | 花蓮縣政府教育處座位分機資料比對系統
+      報告生成時間：2024 年 3 月 ｜ 花蓮縣政府教育處座位分機資料比對系統 | 教網中心-網路管理組
     </footer>
-</div>
-
+  </div>
 </body>
 </html>
