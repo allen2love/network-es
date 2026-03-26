@@ -1,436 +1,510 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>花蓮縣各校網路改善清單</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- 字型：與原站類似的 Noto Sans -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
 <style>
   :root {
-    --bg: #0d0f14;
-    --surface: #161920;
-    --surface2: #1e2230;
-    --border: rgba(255,255,255,0.07);
-    --text: #eef0f5;
-    --text-muted: #7a8099;
-    --text-dim: #454c63;
-    --c1: #4f9cf9;
-    --c1-glow: rgba(79,156,249,0.25);
-    --c1-bg: rgba(79,156,249,0.1);
-    --c2: #2dd4a7;
-    --c2-glow: rgba(45,212,167,0.25);
-    --c2-bg: rgba(45,212,167,0.1);
-    --c3: #f97b4f;
-    --c3-glow: rgba(249,123,79,0.25);
-    --c3-bg: rgba(249,123,79,0.1);
-    --c4: #c084fc;
-    --c4-glow: rgba(192,132,252,0.25);
-    --c4-bg: rgba(192,132,252,0.1);
+    /* 依照 https://allen2love.github.io/network-es/ 的亮色系調整 */
+    --bg: #f5f7fb;
+    --surface: #ffffff;
+    --surface2: #f1f3f8;
+    --border: #d5d9e5;
+    --text: #1f2933;
+    --text-muted: #6b7280;
+    --text-dim: #9ca3af;
+    --primary: #1f4f8f;
+    --primary-soft: #e4edf9;
+
+    --c1: #2563eb;
+    --c1-bg: #e0edff;
+    --c2: #16a085;
+    --c2-bg: #d7f5ed;
+    --c3: #e67e22;
+    --c3-bg: #ffe9d5;
+    --c4: #8b5cf6;
+    --c4-bg: #ede9fe;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
 
   body {
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Noto Sans TC', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    overflow-x: hidden;
   }
 
-  /* Grid background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 48px 48px;
-    pointer-events: none;
-    z-index: 0;
+  /* 頂端導覽列，仿原站 */
+  .site-header {
+    background: linear-gradient(90deg, #0f172a 0%, #1f2937 50%, #111827 100%);
+    color: #e5e7eb;
+    padding: 10px 24px;
+    border-bottom: 1px solid #111827;
   }
-
-  .container { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
-
-  /* Header */
-  .header { margin-bottom: 40px; }
-  .header-eyebrow {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 12px;
+  .site-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
   }
-  .header-eyebrow::before {
-    content: '';
-    display: inline-block;
-    width: 20px;
-    height: 1px;
-    background: var(--text-muted);
+  .site-title {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
-  .header h1 {
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-  .header p {
-    font-size: 14px;
-    color: var(--text-muted);
-    font-weight: 300;
+  .site-sub {
+    font-size: 12px;
+    color: #9ca3af;
   }
 
-  /* Category cards */
+  .nav-links {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+  }
+  .nav-link a {
+    color: #e5e7eb;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 999px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-link a:hover {
+    background: #1f2937;
+    color: #ffffff;
+  }
+  .nav-link.active a {
+    background: #2563eb;
+    color: #ffffff;
+  }
+
+  /* 主要容器：與 index/info page 類似窄版心 */
+  .container {
+    max-width: 1100px;
+    margin: 24px auto 48px;
+    padding: 0 20px 0;
+  }
+
+  /* Header 區塊改成卡片樣式 */
+  .page-head-card {
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 20px 20px 18px;
+    box-shadow: 0 2px 4px rgba(15,23,42,0.04);
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .page-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .page-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.01em;
+  }
+  .page-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    border: 1px solid #c3d4f7;
+  }
+  .page-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* 上方類別列改成貼近原站的扁平卡片 */
   .cat-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 32px;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 10px;
+    margin-bottom: 18px;
   }
 
   .cat-card {
     background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 20px;
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
-    position: relative;
-    overflow: hidden;
-  }
-  .cat-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 14px;
-    opacity: 0;
-    transition: opacity 0.25s;
-  }
-  .cat-card:hover { transform: translateY(-2px); }
-  .cat-card.active { border-color: transparent; }
-
-  .cat-card[data-ci="0"]::after { box-shadow: inset 0 0 0 2px var(--c1); }
-  .cat-card[data-ci="1"]::after { box-shadow: inset 0 0 0 2px var(--c2); }
-  .cat-card[data-ci="2"]::after { box-shadow: inset 0 0 0 2px var(--c3); }
-  .cat-card[data-ci="3"]::after { box-shadow: inset 0 0 0 2px var(--c4); }
-
-  .cat-card.active[data-ci="0"] { background: var(--c1-bg); }
-  .cat-card.active[data-ci="1"] { background: var(--c2-bg); }
-  .cat-card.active[data-ci="2"] { background: var(--c3-bg); }
-  .cat-card.active[data-ci="3"] { background: var(--c4-bg); }
-  .cat-card.active::after { opacity: 1; }
-
-  .cat-icon {
-    width: 36px; height: 36px;
     border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    padding: 12px 12px 10px;
+    cursor: pointer;
+    transition: border-color 0.18s, box-shadow 0.18s, background 0.18s, transform 0.12s;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .cat-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(15,23,42,0.06);
+  }
+  .cat-card.active {
+    border-color: #2563eb;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.18);
+  }
+
+  .cat-row-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cat-label {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .cat-icon {
     font-size: 16px;
   }
-  .cat-card[data-ci="0"] .cat-icon { background: var(--c1-bg); }
-  .cat-card[data-ci="1"] .cat-icon { background: var(--c2-bg); }
-  .cat-card[data-ci="2"] .cat-icon { background: var(--c3-bg); }
-  .cat-card[data-ci="3"] .cat-icon { background: var(--c4-bg); }
-
   .cat-count {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 36px;
-    font-weight: 600;
-    line-height: 1;
-    margin-bottom: 4px;
-    letter-spacing: -0.03em;
+    font-size: 20px;
+    font-weight: 700;
   }
+  .cat-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
   .cat-card[data-ci="0"] .cat-count { color: var(--c1); }
   .cat-card[data-ci="1"] .cat-count { color: var(--c2); }
   .cat-card[data-ci="2"] .cat-count { color: var(--c3); }
   .cat-card[data-ci="3"] .cat-count { color: var(--c4); }
 
-  .cat-label { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
-  .cat-sub { font-size: 11px; color: var(--text-muted); }
-
-  /* Main content layout */
+  /* 主內容：左右分欄，左大右小 */
   .content-grid {
     display: grid;
-    grid-template-columns: 1fr 340px;
+    grid-template-columns: minmax(0,1.6fr) minmax(0,1fr);
     gap: 16px;
     align-items: start;
   }
 
-  /* Bar chart */
-  .chart-panel {
+  .panel {
     background: var(--surface);
+    border-radius: 12px;
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
+    padding: 16px 16px 14px;
+    box-shadow: 0 2px 4px rgba(15,23,42,0.04);
   }
 
   .panel-header {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 8px;
+    margin-bottom: 12px;
   }
   .panel-title {
     font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
+    font-weight: 600;
   }
   .panel-badge {
-    font-family: 'DM Sans', sans-serif;
     font-size: 11px;
-    font-weight: 500;
-    padding: 3px 8px;
-    border-radius: 20px;
-    letter-spacing: 0.03em;
+    padding: 2px 7px;
+    border-radius: 999px;
+    border: 1px solid transparent;
   }
-  #panelBadge0 { background: var(--c1-bg); color: var(--c1); }
-  #panelBadge1 { background: var(--c2-bg); color: var(--c2); }
-  #panelBadge2 { background: var(--c3-bg); color: var(--c3); }
-  #panelBadge3 { background: var(--c4-bg); color: var(--c4); }
+  #panelBadge0 { background: var(--c1-bg); color: var(--c1); border-color: #c4d7ff; }
+  #panelBadge1 { background: var(--c2-bg); color: var(--c2); border-color: #b8f0de; }
+  #panelBadge2 { background: var(--c3-bg); color: var(--c3); border-color: #ffd2ab; }
+  #panelBadge3 { background: var(--c4-bg); color: var(--c4); border-color: #dbc8ff; }
 
-  .bar-scroll { max-height: 520px; overflow-y: auto; padding-right: 4px; }
-  .bar-scroll::-webkit-scrollbar { width: 3px; }
-  .bar-scroll::-webkit-scrollbar-track { background: transparent; }
-  .bar-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
+  /* 左側條列圖 */
+  .bar-scroll {
+    max-height: 480px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+  .bar-scroll::-webkit-scrollbar { width: 4px; }
+  .bar-scroll::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 999px;
+  }
   .bar-row {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    padding: 4px 6px;
+    gap: 8px;
+    margin-bottom: 6px;
+    padding: 4px 4px;
     border-radius: 6px;
-    transition: background 0.15s;
+    cursor: pointer;
+    transition: background 0.12s;
   }
-  .bar-row:hover { background: rgba(255,255,255,0.04); }
-
+  .bar-row:hover {
+    background: #f3f4f6;
+  }
   .bar-name {
-    width: 88px;
-    min-width: 88px;
+    width: 100px;
+    min-width: 100px;
     font-size: 12px;
     color: var(--text-muted);
-    text-align: right;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    transition: color 0.15s;
   }
-  .bar-row:hover .bar-name { color: var(--text); }
-
   .bar-track {
     flex: 1;
-    height: 28px;
-    background: rgba(255,255,255,0.04);
-    border-radius: 6px;
-    position: relative;
+    height: 24px;
+    background: #f3f4f6;
+    border-radius: 999px;
     overflow: hidden;
+    position: relative;
   }
-
   .bar-fill {
     height: 100%;
-    border-radius: 6px;
+    border-radius: 999px;
     display: flex;
     align-items: center;
     padding: 0 8px;
-    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-    min-width: 36px;
+    min-width: 40px;
+    transition: width 0.4s ease-out;
   }
   .bar-val {
-    font-family: 'DM Sans', sans-serif;
     font-size: 11px;
-    font-weight: 500;
-    white-space: nowrap;
+    font-weight: 600;
   }
-
   .bar-town {
     width: 52px;
     min-width: 52px;
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text-dim);
     text-align: right;
   }
 
-  /* Right panel */
+  /* 右側區塊 */
   .right-panel {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px;
   }
-
-  /* Donut chart panel */
-  .donut-panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px;
-  }
-
   .donut-wrap {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin-top: 16px;
+    gap: 10px;
+    margin-top: 10px;
   }
-
-  canvas#donut { flex-shrink: 0; }
-
-  .donut-legend { flex: 1; }
+  canvas#donut {
+    flex-shrink: 0;
+  }
+  .donut-legend {
+    flex: 1;
+  }
   .donut-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 10px;
+    padding: 4px 6px;
+    border-radius: 6px;
     cursor: pointer;
-    padding: 5px 8px;
-    border-radius: 8px;
-    transition: background 0.15s;
+    font-size: 12px;
+    transition: background 0.12s;
   }
-  .donut-item:hover { background: rgba(255,255,255,0.04); }
-  .donut-item.active { background: rgba(255,255,255,0.06); }
-  .donut-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .donut-name { font-size: 12px; color: var(--text-muted); flex: 1; }
+  .donut-item:hover {
+    background: #f3f4f6;
+  }
+  .donut-item.active {
+    background: #e5edff;
+  }
+  .donut-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+  }
   .donut-n {
-    font-family: 'DM Sans', sans-serif;
     font-size: 13px;
     font-weight: 600;
   }
 
-  /* School tag panel */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 8px;
+  }
+  .stat-card {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 10px 10px 8px;
+  }
+  .stat-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .stat-val {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .stat-unit {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: 2px;
+  }
+
   .tags-panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px;
-    max-height: 320px;
+    max-height: 260px;
     overflow-y: auto;
   }
-  .tags-panel::-webkit-scrollbar { width: 3px; }
-  .tags-panel::-webkit-scrollbar-track { background: transparent; }
-  .tags-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
+  .tags-panel::-webkit-scrollbar { width: 4px; }
+  .tags-panel::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 999px;
+  }
   .tags-title {
     font-size: 13px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     gap: 8px;
   }
   .tags-title-count {
-    font-family: 'DM Sans', sans-serif;
     font-size: 11px;
     padding: 2px 7px;
-    border-radius: 20px;
+    border-radius: 999px;
   }
-
-  .tag-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
   .school-tag {
     font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    cursor: default;
-    transition: transform 0.15s;
+    padding: 3px 10px;
+    border-radius: 999px;
     border: 1px solid transparent;
+    background: #f3f4f6;
+    color: #374151;
   }
-  .school-tag:hover { transform: scale(1.04); }
 
-  /* Stat cards row */
-  .stat-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 0;
-  }
-  .stat-card {
-    background: var(--surface2);
-    border-radius: 12px;
-    padding: 14px;
-  }
-  .stat-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
-  .stat-val {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .stat-unit { font-size: 11px; color: var(--text-muted); font-weight: 400; margin-left: 2px; }
-
-  /* Footer */
   .footer {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin-top: 16px;
     font-size: 11px;
-    color: var(--text-dim);
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
   }
-
-  /* Transition */
-  .fade-in { animation: fadeIn 0.35s ease; }
-  @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform:translateY(0); } }
 
   @media (max-width: 900px) {
-    .cat-grid { grid-template-columns: repeat(2,1fr); }
-    .content-grid { grid-template-columns: 1fr; }
-    .header h1 { font-size: 22px; }
+    .site-header-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .content-grid {
+      grid-template-columns: minmax(0,1fr);
+    }
+    .cat-grid {
+      grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+    .footer {
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-start;
+    }
   }
 </style>
 </head>
 <body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div>
+      <div class="site-title">Hualien Network ES</div>
+      <div class="site-sub">花蓮縣教育處 │ 校園網路建設</div>
+    </div>
+    <nav class="nav-links">
+      <span class="nav-link"><a href="./">首頁</a></span>
+      <span class="nav-link"><a href="information-tools.html">資訊工具</a></span>
+      <span class="nav-link active"><a href="snw-imp.html">網路改善清單</a></span>
+      <span class="nav-link"><a href="staff.html">成員分工</a></span>
+    </nav>
+  </div>
+</header>
+
 <div class="container">
 
-  <!-- Header -->
-  <div class="header">
-    <div class="header-eyebrow">花蓮縣教育處 · 網路建設計畫</div>
-    <h1>各校網路改善清單</h1>
-    <p>點選下方類別卡片，查看各項改善計畫學校分布與詳細名單</p>
-  </div>
+  <section class="page-head-card">
+    <div class="eyebrow">HUALIEN COUNTY • NETWORK PLAN</div>
+    <div class="page-title-row">
+      <h1 class="page-title">花蓮縣各校網路改善清單</h1>
+      <span class="page-tag">校園網路建設概況</span>
+    </div>
+    <p class="page-desc">
+      點選下方類別卡片，可查看不同改善類型所涵蓋之學校分布、學生人數與完整名單。
+    </p>
+  </section>
 
-  <!-- Category cards -->
+  <!-- 類別卡片列 -->
   <div class="cat-grid" id="catGrid">
     <div class="cat-card" data-ci="0" onclick="select(0)">
-      <div class="cat-icon">🌐</div>
+      <div class="cat-row-top">
+        <div>
+          <div class="cat-label">網路改善（補助）</div>
+          <div class="cat-sub">教育處補助經費</div>
+        </div>
+        <div class="cat-icon">🌐</div>
+      </div>
       <div class="cat-count" id="n0">36</div>
-      <div class="cat-label">網路改善（補助）</div>
-      <div class="cat-sub">教育處補助</div>
     </div>
+
     <div class="cat-card" data-ci="1" onclick="select(1)">
-      <div class="cat-icon">🔧</div>
+      <div class="cat-row-top">
+        <div>
+          <div class="cat-label">局部改善（自費）</div>
+          <div class="cat-sub">學校自籌經費</div>
+        </div>
+        <div class="cat-icon">🔧</div>
+      </div>
       <div class="cat-count" id="n1">26</div>
-      <div class="cat-label">局部改善（自費）</div>
-      <div class="cat-sub">學校自費局部改善</div>
     </div>
+
     <div class="cat-card" data-ci="2" onclick="select(2)">
-      <div class="cat-icon">📋</div>
+      <div class="cat-row-top">
+        <div>
+          <div class="cat-label">建議改善名單</div>
+          <div class="cat-sub">列入後續規劃</div>
+        </div>
+        <div class="cat-icon">📋</div>
+      </div>
       <div class="cat-count" id="n2">30</div>
-      <div class="cat-label">建議改善名單</div>
-      <div class="cat-sub">列入建議改善清單</div>
     </div>
+
     <div class="cat-card" data-ci="3" onclick="select(3)">
-      <div class="cat-icon">🖥️</div>
+      <div class="cat-row-top">
+        <div>
+          <div class="cat-label">機房整線（自費）</div>
+          <div class="cat-sub">學校機房整理</div>
+        </div>
+        <div class="cat-icon">🖥️</div>
+      </div>
       <div class="cat-count" id="n3">24</div>
-      <div class="cat-label">機房整線（自費）</div>
-      <div class="cat-sub">學校自費機房整線</div>
     </div>
   </div>
 
-  <!-- Main content -->
+  <!-- 主內容 -->
   <div class="content-grid">
 
-    <!-- Bar chart -->
-    <div class="chart-panel">
+    <!-- 左側：條列圖 -->
+    <section class="panel">
       <div class="panel-header">
         <div class="panel-title" id="panelTitle">網路改善（教育處補助）</div>
         <span class="panel-badge" id="panelBadge0" style="display:inline-block">40 所學校</span>
@@ -439,31 +513,34 @@
         <span class="panel-badge" id="panelBadge3" style="display:none">24 所學校</span>
       </div>
       <div class="bar-scroll" id="barList"></div>
-    </div>
+    </section>
 
-    <!-- Right column -->
+    <!-- 右側：圓環＋統計＋名單 -->
     <div class="right-panel">
 
-      <!-- Donut -->
-      <div class="donut-panel">
-        <div class="panel-title" style="font-size:13px;color:var(--text-muted);">各類別佔比</div>
+      <section class="panel">
+        <div class="panel-header" style="margin-bottom:6px;">
+          <div class="panel-title" style="font-size:13px;color:var(--text-muted);">
+            各類別學校數佔比
+          </div>
+        </div>
         <div class="donut-wrap">
           <canvas id="donut" width="100" height="100"></canvas>
           <div class="donut-legend" id="donutLegend"></div>
         </div>
-      </div>
+      </section>
 
-      <!-- Stats -->
-      <div class="stat-row" id="statRow"></div>
+      <section class="panel">
+        <div class="stat-row" id="statRow"></div>
+      </section>
 
-      <!-- Tags -->
-      <div class="tags-panel">
+      <section class="panel tags-panel">
         <div class="tags-title">
           學校名單
           <span class="tags-title-count" id="tagsCount"></span>
         </div>
         <div class="tag-grid" id="tagGrid"></div>
-      </div>
+      </section>
 
     </div>
   </div>
@@ -472,14 +549,13 @@
     <span>資料來源：花蓮縣教育處網路改善計畫清單</span>
     <span>共 <strong id="totalCount">0</strong> 所學校</span>
   </div>
-
 </div>
 
 <script>
 const CATS = ['網路改善（補助）','局部改善（自費）','建議改善名單','機房整線（自費）'];
-const COLORS = ['#4f9cf9','#2dd4a7','#f97b4f','#c084fc'];
-const COLORS_BG = ['rgba(79,156,249,0.15)','rgba(45,212,167,0.15)','rgba(249,123,79,0.15)','rgba(192,132,252,0.15)'];
-const COLORS_BORDER = ['rgba(79,156,249,0.4)','rgba(45,212,167,0.4)','rgba(249,123,79,0.4)','rgba(192,132,252,0.4)'];
+const COLORS = ['#2563eb','#16a085','#e67e22','#8b5cf6'];
+const COLORS_BG = ['#e0edff','#d7f5ed','#ffe9d5','#ede9fe'];
+const COLORS_BORDER = ['#c4d7ff','#b8f0de','#ffd2ab','#dbc8ff'];
 
 const schools = [
   {name:'國立東華大學附設實小', t:'花蓮市', s:807, c:[0,0,0,1]},
@@ -627,8 +703,10 @@ function select(ci) {
   selCat = ci;
   document.querySelectorAll('.cat-card').forEach(el => el.classList.remove('active'));
   document.querySelector(`.cat-card[data-ci="${ci}"]`).classList.add('active');
+
   [0,1,2,3].forEach(i => {
     const b = document.getElementById('panelBadge'+i);
+    if (!b) return;
     b.style.display = i===ci ? 'inline-block' : 'none';
   });
 
@@ -646,6 +724,7 @@ function renderBars(ci) {
   const max = list[0]?.s || 1;
   const color = COLORS[ci];
   const bg = COLORS_BG[ci];
+  const border = COLORS_BORDER[ci];
   const barList = document.getElementById('barList');
   barList.innerHTML = '';
 
@@ -653,11 +732,10 @@ function renderBars(ci) {
     const pct = Math.round((s.s/max)*100);
     const row = document.createElement('div');
     row.className = 'bar-row';
-    row.style.animationDelay = (i*0.02)+'s';
     row.innerHTML = `
       <div class="bar-name" title="${s.t} ${s.name}">${s.name}</div>
       <div class="bar-track">
-        <div class="bar-fill" style="width:${pct}%;background:${bg};border:1px solid ${COLORS_BORDER[ci]};">
+        <div class="bar-fill" style="width:${pct}%;background:${bg};border:1px solid ${border};">
           <span class="bar-val" style="color:${color};">${s.s}</span>
         </div>
       </div>
@@ -665,10 +743,11 @@ function renderBars(ci) {
     barList.appendChild(row);
     setTimeout(() => {
       row.querySelector('.bar-fill').style.width = pct+'%';
-    }, 30 + i*15);
+    }, 20 + i*12);
   });
 
-  document.getElementById('panelBadge'+ci).textContent = counts[ci]+' 所學校';
+  const badge = document.getElementById('panelBadge'+ci);
+  if (badge) badge.textContent = counts[ci]+' 所學校';
 }
 
 function renderTags(ci) {
@@ -706,7 +785,7 @@ function drawDonut(activeCi) {
   const canvas = document.getElementById('donut');
   const ctx = canvas.getContext('2d');
   const W = 100, H = 100;
-  const cx = W/2, cy = H/2, r = 38, inner = 24;
+  const cx = W/2, cy = H/2, r = 34, inner = 22;
   ctx.clearRect(0,0,W,H);
 
   const total = counts.reduce((a,b)=>a+b,0);
@@ -716,45 +795,37 @@ function drawDonut(activeCi) {
     const sweep = (v/total) * Math.PI * 2;
     ctx.beginPath();
     ctx.moveTo(cx,cy);
-    ctx.arc(cx,cy, i===activeCi ? r+4 : r, start, start+sweep);
+    ctx.arc(cx,cy, i===activeCi ? r+3 : r, start, start+sweep);
     ctx.closePath();
     ctx.fillStyle = i===activeCi ? COLORS[i] : COLORS_BG[i];
     ctx.fill();
-
-    if(i===activeCi) {
-      ctx.beginPath();
-      ctx.arc(cx,cy,r+4,start,start+sweep);
-      ctx.strokeStyle = COLORS[i];
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-    }
     start += sweep;
   });
 
   ctx.beginPath();
   ctx.arc(cx,cy,inner,0,Math.PI*2);
-  ctx.fillStyle = '#161920';
+  ctx.fillStyle = '#ffffff';
   ctx.fill();
 
   ctx.fillStyle = COLORS[activeCi];
-  ctx.font = 'bold 14px DM Sans, sans-serif';
+  ctx.font = 'bold 14px system-ui, sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(counts[activeCi], cx, cy-6);
-  ctx.fillStyle = '#7a8099';
-  ctx.font = '8px Noto Sans TC, sans-serif';
-  ctx.fillText('所', cx, cy+7);
+  ctx.fillStyle = '#6b7280';
+  ctx.font = '9px system-ui, sans-serif';
+  ctx.fillText('所學校', cx, cy+7);
 
   const legend = document.getElementById('donutLegend');
   legend.innerHTML = counts.map((v,i) => `
     <div class="donut-item ${i===activeCi?'active':''}" onclick="select(${i})">
-      <span class="donut-dot" style="background:${COLORS[i]};${i!==activeCi?'opacity:0.4':''}"></span>
-      <span class="donut-name" style="${i===activeCi?'color:var(--text)':''}">${CATS[i]}</span>
+      <span class="donut-dot" style="background:${COLORS[i]};${i!==activeCi?'opacity:0.45':''}"></span>
+      <span style="flex:1;${i===activeCi?'font-weight:600;':''}">${CATS[i]}</span>
       <span class="donut-n" style="color:${COLORS[i]}">${v}</span>
     </div>`).join('');
 }
 
-// Init
+// 初始化
 select(0);
 </script>
 </body>
