@@ -1,142 +1,835 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>花蓮縣各校網路改善清單｜Hualien Network ES</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>花蓮縣各校網路改善清單</title>
 
-  <!-- 字型：沿用你給的那組 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
+<!-- 字型：與原站類似的 Noto Sans -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon & theme color -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>✨</text></svg>">
-  <meta name="theme-color" content="#667eea">
+<style>
+  :root {
+    /* 依照 https://allen2love.github.io/network-es/ 的亮色系調整 */
+    --bg: #f5f7fb;
+    --surface: #ffffff;
+    --surface2: #f1f3f8;
+    --border: #d5d9e5;
+    --text: #1f2933;
+    --text-muted: #6b7280;
+    --text-dim: #9ca3af;
+    --primary: #1f4f8f;
+    --primary-soft: #e4edf9;
 
-  <style>
-    /* ====== 這裡保留你的液態背景 + 玻璃 UI + 密碼彈窗 CSS（可直接貼上） ====== */
-    /* 直接從你提供的 <style> 全段複製到這裡即可，內容不改 */
-  </style>
+    --c1: #2563eb;
+    --c1-bg: #e0edff;
+    --c2: #16a085;
+    --c2-bg: #d7f5ed;
+    --c3: #e67e22;
+    --c3-bg: #ffe9d5;
+    --c4: #8b5cf6;
+    --c4-bg: #ede9fe;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Noto Sans TC', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* 頂端導覽列，仿原站 */
+  .site-header {
+    background: linear-gradient(90deg, #0f172a 0%, #1f2937 50%, #111827 100%);
+    color: #e5e7eb;
+    padding: 10px 24px;
+    border-bottom: 1px solid #111827;
+  }
+  .site-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .site-title {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .site-sub {
+    font-size: 12px;
+    color: #9ca3af;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+  }
+  .nav-link a {
+    color: #e5e7eb;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 999px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-link a:hover {
+    background: #1f2937;
+    color: #ffffff;
+  }
+  .nav-link.active a {
+    background: #2563eb;
+    color: #ffffff;
+  }
+
+  /* 主要容器：與 index/info page 類似窄版心 */
+  .container {
+    max-width: 1100px;
+    margin: 24px auto 48px;
+    padding: 0 20px 0;
+  }
+
+  /* Header 區塊改成卡片樣式 */
+  .page-head-card {
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 20px 20px 18px;
+    box-shadow: 0 2px 4px rgba(15,23,42,0.04);
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .page-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .page-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.01em;
+  }
+  .page-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    border: 1px solid #c3d4f7;
+  }
+  .page-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* 上方類別列改成貼近原站的扁平卡片 */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .cat-card {
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 12px 12px 10px;
+    cursor: pointer;
+    transition: border-color 0.18s, box-shadow 0.18s, background 0.18s, transform 0.12s;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .cat-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(15,23,42,0.06);
+  }
+  .cat-card.active {
+    border-color: #2563eb;
+    box-shadow: 0 3px 10px rgba(37,99,235,0.18);
+  }
+
+  .cat-row-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cat-label {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .cat-icon {
+    font-size: 16px;
+  }
+  .cat-count {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .cat-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .cat-card[data-ci="0"] .cat-count { color: var(--c1); }
+  .cat-card[data-ci="1"] .cat-count { color: var(--c2); }
+  .cat-card[data-ci="2"] .cat-count { color: var(--c3); }
+  .cat-card[data-ci="3"] .cat-count { color: var(--c4); }
+
+  /* 主內容：左右分欄，左大右小 */
+  .content-grid {
+    display: grid;
+    grid-template-columns: minmax(0,1.6fr) minmax(0,1fr);
+    gap: 16px;
+    align-items: start;
+  }
+
+  .panel {
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 16px 16px 14px;
+    box-shadow: 0 2px 4px rgba(15,23,42,0.04);
+  }
+
+  .panel-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .panel-title {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .panel-badge {
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+  }
+  #panelBadge0 { background: var(--c1-bg); color: var(--c1); border-color: #c4d7ff; }
+  #panelBadge1 { background: var(--c2-bg); color: var(--c2); border-color: #b8f0de; }
+  #panelBadge2 { background: var(--c3-bg); color: var(--c3); border-color: #ffd2ab; }
+  #panelBadge3 { background: var(--c4-bg); color: var(--c4); border-color: #dbc8ff; }
+
+  /* 左側條列圖 */
+  .bar-scroll {
+    max-height: 480px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+  .bar-scroll::-webkit-scrollbar { width: 4px; }
+  .bar-scroll::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 999px;
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    padding: 4px 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .bar-row:hover {
+    background: #f3f4f6;
+  }
+  .bar-name {
+    width: 100px;
+    min-width: 100px;
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bar-track {
+    flex: 1;
+    height: 24px;
+    background: #f3f4f6;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    min-width: 40px;
+    transition: width 0.4s ease-out;
+  }
+  .bar-val {
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .bar-town {
+    width: 52px;
+    min-width: 52px;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-align: right;
+  }
+
+  /* 右側區塊 */
+  .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .donut-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  canvas#donut {
+    flex-shrink: 0;
+  }
+  .donut-legend {
+    flex: 1;
+  }
+  .donut-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.12s;
+  }
+  .donut-item:hover {
+    background: #f3f4f6;
+  }
+  .donut-item.active {
+    background: #e5edff;
+  }
+  .donut-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+  }
+  .donut-n {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 8px;
+  }
+  .stat-card {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 10px 10px 8px;
+  }
+  .stat-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .stat-val {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .stat-unit {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: 2px;
+  }
+
+  .tags-panel {
+    max-height: 260px;
+    overflow-y: auto;
+  }
+  .tags-panel::-webkit-scrollbar { width: 4px; }
+  .tags-panel::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 999px;
+  }
+  .tags-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tags-title-count {
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
+  .tag-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .school-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: #f3f4f6;
+    color: #374151;
+  }
+
+  .footer {
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 900px) {
+    .site-header-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .content-grid {
+      grid-template-columns: minmax(0,1fr);
+    }
+    .cat-grid {
+      grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+    .footer {
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-start;
+    }
+  }
+</style>
 </head>
 <body>
-  <!-- 液態波浪背景 -->
-  <div class="liquid-bg">
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div>
+      <div class="site-title">Hualien Network ES</div>
+      <div class="site-sub">花蓮縣教育處 │ 校園網路建設</div>
+    </div>  
+    <!-- 不顯示
+    <nav class="nav-links">
+      <span class="nav-link"><a href="./">首頁</a></span>
+      <span class="nav-link"><a href="information-tools.html">資訊工具</a></span>
+      <span class="nav-link active"><a href="snw-imp.html">網路改善清單</a></span>
+      <span class="nav-link"><a href="staff.html">成員分工</a></span>
+    </nav>
   </div>
+    -->
+</header>
 
-  <div class="container">
-    <!-- 頁首：可依網路 ES 改字 -->
-    <header class="fade-in">
-      <h1>Hualien Network ES｜花蓮縣各校網路改善清單</h1>
-    </header>
+<div class="container">
 
-    <!-- Hero 區：改成說明這一頁用途 -->
-    <div class="glass-card hero fade-in">
-      <h2>花蓮縣各校網路改善清單</h2>
-      <p>校園網路建設概況：點選下方類別卡片，可查看不同改善類型所涵蓋之學校分布與名單。</p>
-      <a href="index.html" class="btn">返回首頁</a>
+  <section class="page-head-card">
+    <div class="eyebrow">HUALIEN COUNTY • NETWORK PLAN</div>
+    <div class="page-title-row">
+      <h1 class="page-title">花蓮縣各校網路改善清單</h1>
+      <span class="page-tag">校園網路建設概況</span>
+    </div>
+    <p class="page-desc">
+      點選下方類別卡片，可查看不同改善類型所涵蓋之學校分布、學生人數與完整名單。
+    </p>
+  </section>
+
+  <!-- 類別卡片列 -->
+  <div class="cat-grid" id="catGrid">
+    <div class="cat-card" data-ci="0" onclick="select(0)">
+      <div class="cat-row-top">
+        <div>
+          <div class="cat-label">網路改善（補助）</div>
+          <div class="cat-sub">教育處補助經費</div>
+        </div>
+        <div class="cat-icon">🌐</div>
+      </div>
+      <div class="cat-count" id="n0">36</div>
     </div>
 
-    <!-- 類別卡片區：用你的 grid-item 當四大分類 -->
-    <section class="glass-card fade-in">
-      <h2 style="color: white; font-size: 2rem; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-        改善類別總覽
-      </h2>
-
-      <div class="grid">
-        <a href="#cat-subsidy" class="grid-item-link">
-          <div class="grid-item">
-            <h3>🌐 網路改善（補助）</h3>
-            <p>教育處補助經費，涵蓋 32 所學校。</p>
-            <span class="card-arrow">→</span>
-          </div>
-        </a>
-
-        <a href="#cat-partial" class="grid-item-link">
-          <div class="grid-item">
-            <h3>🔧 局部改善（自費）</h3>
-            <p>學校自籌經費，主要處理區域性瓶頸。</p>
-            <span class="card-arrow">→</span>
-          </div>
-        </a>
-
-        <a href="#cat-suggest" class="grid-item-link">
-          <div class="grid-item">
-            <h3>📋 建議改善名單</h3>
-            <p>列入後續規劃與評估之學校。</p>
-            <span class="card-arrow">→</span>
-          </div>
-        </a>
-
-        <a href="#cat-room" class="grid-item-link">
-          <div class="grid-item">
-            <h3>🖥️ 機房整線（自費）</h3>
-            <p>以機房整理、佈線優化為主的改善項目。</p>
-            <span class="card-arrow">→</span>
-          </div>
-        </a>
+    <div class="cat-card" data-ci="1" onclick="select(1)">
+      <div class="cat-row-top">
+        <div>
+          <div class="cat-label">局部改善（自費）</div>
+          <div class="cat-sub">學校自籌經費</div>
+        </div>
+        <div class="cat-icon">🔧</div>
       </div>
-    </section>
+      <div class="cat-count" id="n1">26</div>
+    </div>
 
-    <!-- 各類別詳細區塊：用表格放你現在 Markdown 的名單 -->
-    <section id="cat-subsidy" class="glass-card fade-in">
-      <h2 style="color: white; font-size: 1.8rem; margin-bottom: 16px;">網路改善（教育處補助）</h2>
-      <p style="color: rgba(255,255,255,0.9); margin-bottom: 16px;">
-        共 32 所學校，涵蓋學生 10,320 人，平均每校 323 人。
-      </p>
-
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>學校名稱</th>
-              <th>學生人數</th>
-              <th>行政區</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>國風國中</td><td>1514</td><td>花蓮市</td></tr>
-            <tr><td>明義國小</td><td>1232</td><td>花蓮市</td></tr>
-            <tr><td>花崗國中</td><td>1170</td><td>花蓮市</td></tr>
-            <!-- 其餘學校照你原本 Markdown 一一貼上 -->
-          </tbody>
-        </table>
+    <div class="cat-card" data-ci="2" onclick="select(2)">
+      <div class="cat-row-top">
+        <div>
+          <div class="cat-label">建議改善名單</div>
+          <div class="cat-sub">列入後續規劃</div>
+        </div>
+        <div class="cat-icon">📋</div>
       </div>
-    </section>
+      <div class="cat-count" id="n2">30</div>
+    </div>
 
-    <!-- 其他三類可以複製上一段結構再換內容 -->
-    <section id="cat-partial" class="glass-card fade-in">
-      <h2 style="color: white; font-size: 1.8rem; margin-bottom: 16px;">局部改善（自費）</h2>
-      <!-- 表格內容自行填入 -->
-    </section>
-
-    <section id="cat-suggest" class="glass-card fade-in">
-      <h2 style="color: white; font-size: 1.8rem; margin-bottom: 16px;">建議改善名單</h2>
-      <!-- 表格內容自行填入 -->
-    </section>
-
-    <section id="cat-room" class="glass-card fade-in">
-      <h2 style="color: white; font-size: 1.8rem; margin-bottom: 16px;">機房整線（自費）</h2>
-      <!-- 表格內容自行填入 -->
-    </section>
-
-    <!-- Footer：可以沿用你學院那個，或改成教育處版 -->
-    <footer class="fade-in">
-      <p>© 2026 花蓮縣教育處 校園網路建設</p>
-      <p style="margin-top: 10px; font-size: 0.9rem;">Hualien Network ES</p>
-      <div style="margin-top: 20px;">
-        <a href="#" class="btn-back-top">↑ 返回頂部</a>
+    <div class="cat-card" data-ci="3" onclick="select(3)">
+      <div class="cat-row-top">
+        <div>
+          <div class="cat-label">機房整線（自費）</div>
+          <div class="cat-sub">學校機房整理</div>
+        </div>
+        <div class="cat-icon">🖥️</div>
       </div>
-    </footer>
+      <div class="cat-count" id="n3">24</div>
+    </div>
   </div>
 
-  <!-- 這裡貼上你原本的「返回頂部按鈕 CSS」＋「密碼彈窗 CSS & JS」就好 -->
+  <!-- 主內容 -->
+  <div class="content-grid">
 
-  <script>
-    /* 如果需要密碼區塊，直接複製你原本的 script；這一頁若不用可刪 */
-  </script>
+    <!-- 左側：條列圖 -->
+    <section class="panel">
+      <div class="panel-header">
+        <div class="panel-title" id="panelTitle">網路改善（教育處補助）</div>
+        <span class="panel-badge" id="panelBadge0" style="display:inline-block">40 所學校</span>
+        <span class="panel-badge" id="panelBadge1" style="display:none">26 所學校</span>
+        <span class="panel-badge" id="panelBadge2" style="display:none">30 所學校</span>
+        <span class="panel-badge" id="panelBadge3" style="display:none">24 所學校</span>
+      </div>
+      <div class="bar-scroll" id="barList"></div>
+    </section>
+
+    <!-- 右側：圓環＋統計＋名單 -->
+    <div class="right-panel">
+
+      <section class="panel">
+        <div class="panel-header" style="margin-bottom:6px;">
+          <div class="panel-title" style="font-size:13px;color:var(--text-muted);">
+            各類別學校數佔比
+          </div>
+        </div>
+        <div class="donut-wrap">
+          <canvas id="donut" width="100" height="100"></canvas>
+          <div class="donut-legend" id="donutLegend"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="stat-row" id="statRow"></div>
+      </section>
+
+      <section class="panel tags-panel">
+        <div class="tags-title">
+          學校名單
+          <span class="tags-title-count" id="tagsCount"></span>
+        </div>
+        <div class="tag-grid" id="tagGrid"></div>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>資料來源：花蓮縣教育處網路改善計畫清單</span>
+    <span>共 <strong id="totalCount">0</strong> 所學校</span>
+  </div>
+</div>
+
+<script>
+const CATS = ['網路改善（補助）','局部改善（自費）','建議改善名單','機房整線（自費）'];
+const COLORS = ['#2563eb','#16a085','#e67e22','#8b5cf6'];
+const COLORS_BG = ['#e0edff','#d7f5ed','#ffe9d5','#ede9fe'];
+const COLORS_BORDER = ['#c4d7ff','#b8f0de','#ffd2ab','#dbc8ff'];
+
+const schools = [
+  {name:'國立東華大學附設實小', t:'花蓮市', s:807, c:[0,0,0,1]},
+  {name:'鑄強國小', t:'花蓮市', s:543, c:[1,0,0,1]},
+  {name:'自強國中', t:'花蓮市', s:517, c:[0,1,0,1]},
+  {name:'北埔國小', t:'新城鄉', s:495, c:[0,1,0,1]},
+  {name:'明廉國小', t:'花蓮市', s:474, c:[1,0,0,1]},
+  {name:'吉安國小', t:'吉安鄉', s:348, c:[0,1,0,1]},
+  {name:'太昌國小', t:'吉安鄉', s:276, c:[0,1,1,1]},
+  {name:'志學國小', t:'壽豐鄉', s:121, c:[1,0,0,1]},
+  {name:'花蓮縣立體育高中', t:'花蓮市', s:116, c:[0,1,0,1]},
+  {name:'水源國小', t:'秀林鄉', s:97, c:[1,0,0,1]},
+  {name:'富里國中', t:'富里鄉', s:83, c:[0,1,0,1]},
+  {name:'崇德國小', t:'秀林鄉', s:81, c:[1,0,0,1]},
+  {name:'秀林國小', t:'秀林鄉', s:79, c:[0,0,1,1]},
+  {name:'銅蘭國小', t:'秀林鄉', s:51, c:[0,1,1,1]},
+  {name:'南華國小', t:'吉安鄉', s:50, c:[1,0,0,1]},
+  {name:'豐裡國小', t:'壽豐鄉', s:50, c:[1,1,0,1]},
+  {name:'鳳仁國小', t:'鳳林鎮', s:50, c:[0,1,1,1]},
+  {name:'西寶國小', t:'秀林鄉', s:46, c:[1,1,0,1]},
+  {name:'景美國小', t:'秀林鄉', s:46, c:[0,0,0,1]},
+  {name:'三棧國小', t:'秀林鄉', s:45, c:[1,0,0,1]},
+  {name:'大榮國小', t:'鳳林鎮', s:45, c:[0,0,0,1]},
+  {name:'長良國小', t:'玉里鎮', s:24, c:[1,0,0,1]},
+  {name:'鶴岡國小', t:'瑞穗鄉', s:21, c:[0,1,1,1]},
+  {name:'水璉國小', t:'壽豐鄉', s:20, c:[0,0,1,1]},
+  {name:'見晴國小', t:'萬榮鄉', s:34, c:[0,0,0,0]},
+  {name:'中城國小', t:'玉里鎮', s:306, c:[0,0,1,0]},
+  {name:'化仁國中', t:'吉安鄉', s:240, c:[0,0,0,0]},
+  {name:'鳳林國中', t:'鳳林鎮', s:222, c:[0,0,0,0]},
+  {name:'吉安國中', t:'吉安鄉', s:206, c:[0,0,0,0]},
+  {name:'西富國小', t:'光復鄉', s:26, c:[0,0,0,0]},
+  {name:'國風國中', t:'花蓮市', s:1514, c:[1,0,0,0]},
+  {name:'明義國小', t:'花蓮市', s:1232, c:[1,0,0,0]},
+  {name:'花崗國中', t:'花蓮市', s:1170, c:[1,0,0,0]},
+  {name:'中正國小', t:'花蓮市', s:998, c:[1,0,0,0]},
+  {name:'宜昌國小', t:'吉安鄉', s:848, c:[1,0,0,0]},
+  {name:'北昌國小', t:'吉安鄉', s:824, c:[1,0,0,0]},
+  {name:'宜昌國中', t:'吉安鄉', s:672, c:[0,1,1,0]},
+  {name:'私立海星國小', t:'花蓮市', s:514, c:[0,1,0,0]},
+  {name:'中原國小', t:'花蓮市', s:485, c:[1,0,0,0]},
+  {name:'玉里國中', t:'玉里鎮', s:470, c:[1,0,0,0]},
+  {name:'忠孝國小', t:'花蓮市', s:427, c:[0,0,1,0]},
+  {name:'玉里國小', t:'玉里鎮', s:334, c:[0,0,1,0]},
+  {name:'中華國小', t:'花蓮市', s:273, c:[0,0,0,0]},
+  {name:'美崙國中', t:'花蓮市', s:264, c:[0,0,1,0]},
+  {name:'稻香國小', t:'吉安鄉', s:248, c:[0,1,0,0]},
+  {name:'瑞穗國小', t:'瑞穗鄉', s:237, c:[0,0,1,0]},
+  {name:'明恥國小', t:'花蓮市', s:225, c:[1,0,0,0]},
+  {name:'明禮國小', t:'花蓮市', s:220, c:[0,0,1,0]},
+  {name:'化仁國小', t:'吉安鄉', s:214, c:[1,0,0,0]},
+  {name:'秀林國中', t:'新城鄉', s:206, c:[1,0,0,0]},
+  {name:'新城國小', t:'新城鄉', s:205, c:[0,0,0,0]},
+  {name:'新城國中', t:'新城鄉', s:191, c:[0,0,1,0]},
+  {name:'光復國中', t:'光復鄉', s:176, c:[0,0,1,0]},
+  {name:'鳳林國小', t:'鳳林鎮', s:159, c:[0,0,1,0]},
+  {name:'瑞穗國中', t:'瑞穗鄉', s:157, c:[0,0,1,0]},
+  {name:'光復國小', t:'光復鄉', s:127, c:[0,0,1,0]},
+  {name:'壽豐國中', t:'壽豐鄉', s:124, c:[0,1,1,0]},
+  {name:'豐山國小', t:'壽豐鄉', s:124, c:[0,0,1,0]},
+  {name:'壽豐國小', t:'壽豐鄉', s:123, c:[0,0,1,0]},
+  {name:'大進國小', t:'光復鄉', s:113, c:[0,0,0,0]},
+  {name:'北濱國小', t:'花蓮市', s:112, c:[0,0,0,0]},
+  {name:'復興國小', t:'花蓮市', s:107, c:[0,0,0,0]},
+  {name:'三民國中', t:'玉里鎮', s:96, c:[1,0,0,0]},
+  {name:'嘉里國小', t:'新城鄉', s:87, c:[1,0,0,0]},
+  {name:'富世國小', t:'秀林鄉', s:81, c:[1,0,0,0]},
+  {name:'富里國小', t:'富里鄉', s:80, c:[0,0,0,0]},
+  {name:'太巴塱國小', t:'光復鄉', s:76, c:[0,1,0,0]},
+  {name:'和平國小', t:'秀林鄉', s:75, c:[1,0,0,0]},
+  {name:'康樂國小', t:'新城鄉', s:75, c:[0,0,0,0]},
+  {name:'光華國小', t:'吉安鄉', s:74, c:[0,0,0,0]},
+  {name:'銅門國小', t:'秀林鄉', s:70, c:[0,0,1,0]},
+  {name:'豐濱國小', t:'豐濱鄉', s:65, c:[1,0,0,0]},
+  {name:'三民國小', t:'玉里鎮', s:64, c:[0,0,0,0]},
+  {name:'東里國小', t:'富里鄉', s:64, c:[0,0,0,0]},
+  {name:'西林國小', t:'萬榮鄉', s:62, c:[0,0,0,0]},
+  {name:'瑞北國小', t:'瑞穗鄉', s:61, c:[0,0,0,0]},
+  {name:'富源國小', t:'瑞穗鄉', s:60, c:[0,1,0,0]},
+  {name:'平和國中', t:'壽豐鄉', s:59, c:[0,0,0,0]},
+  {name:'平和國小', t:'壽豐鄉', s:56, c:[0,0,0,0]},
+  {name:'卓溪國小', t:'卓溪鄉', s:55, c:[0,0,0,0]},
+  {name:'佳民國小', t:'秀林鄉', s:54, c:[0,0,0,0]},
+  {name:'太平國小', t:'卓溪鄉', s:54, c:[0,0,0,0]},
+  {name:'信義國小', t:'花蓮市', s:50, c:[0,0,0,0]},
+  {name:'富北國中', t:'富里鄉', s:50, c:[0,1,0,0]},
+  {name:'立山國小', t:'卓溪鄉', s:49, c:[0,0,0,0]},
+  {name:'富源國中', t:'光復鄉', s:48, c:[0,1,1,0]},
+  {name:'萬榮國小', t:'萬榮鄉', s:48, c:[1,0,0,0]},
+  {name:'玉東國中', t:'玉里鎮', s:46, c:[0,0,1,0]},
+  {name:'東竹國小', t:'富里鄉', s:46, c:[0,1,0,0]},
+  {name:'豐濱國中', t:'豐濱鄉', s:43, c:[1,0,0,0]},
+  {name:'明利國小', t:'萬榮鄉', s:41, c:[0,0,0,0]},
+  {name:'紅葉國小', t:'萬榮鄉', s:39, c:[0,1,1,0]},
+  {name:'松浦國小', t:'玉里鎮', s:38, c:[0,0,0,0]},
+  {name:'文蘭國小', t:'秀林鄉', s:37, c:[0,0,0,0]},
+  {name:'大禹國小', t:'玉里鎮', s:37, c:[0,0,0,0]},
+  {name:'國福國小', t:'花蓮市', s:37, c:[1,0,0,0]},
+  {name:'馬遠國小', t:'萬榮鄉', s:37, c:[0,1,0,0]},
+  {name:'崙山國小', t:'卓溪鄉', s:37, c:[0,0,0,0]},
+  {name:'林榮國小', t:'鳳林鎮', s:36, c:[0,1,0,0]},
+  {name:'春日國小', t:'玉里鎮', s:36, c:[1,0,0,0]},
+  {name:'萬榮國中', t:'鳳林鎮', s:34, c:[0,0,0,0]},
+  {name:'瑞美國小', t:'瑞穗鄉', s:34, c:[0,1,0,0]},
+  {name:'源城國小', t:'玉里鎮', s:33, c:[0,0,0,0]},
+  {name:'樂合國小', t:'玉里鎮', s:33, c:[0,0,0,0]},
+  {name:'古風國小', t:'卓溪鄉', s:33, c:[0,0,0,0]},
+  {name:'東里國中', t:'富里鄉', s:32, c:[0,0,1,0]},
+  {name:'吳江國小', t:'富里鄉', s:29, c:[0,0,0,0]},
+  {name:'明里國小', t:'富里鄉', s:28, c:[0,0,0,0]},
+  {name:'長橋國小', t:'鳳林鎮', s:28, c:[0,0,0,0]},
+  {name:'卓樂國小', t:'卓溪鄉', s:27, c:[0,0,0,0]},
+  {name:'月眉國小', t:'壽豐鄉', s:25, c:[0,0,1,0]},
+  {name:'高寮國小', t:'玉里鎮', s:24, c:[0,0,0,0]},
+  {name:'卓清國小', t:'卓溪鄉', s:24, c:[0,0,0,0]},
+  {name:'大興國小', t:'光復鄉', s:22, c:[0,0,0,0]},
+  {name:'溪口國小', t:'壽豐鄉', s:22, c:[0,0,1,0]},
+  {name:'北林國小', t:'鳳林鎮', s:22, c:[0,0,0,0]},
+  {name:'德武國小', t:'玉里鎮', s:20, c:[0,0,0,0]},
+  {name:'靜浦國小', t:'豐濱鄉', s:18, c:[1,0,0,0]},
+  {name:'萬寧國小', t:'富里鄉', s:17, c:[0,0,0,0]},
+  {name:'新社國小', t:'豐濱鄉', s:17, c:[1,0,0,0]},
+  {name:'港口國小', t:'豐濱鄉', s:16, c:[0,0,0,0]},
+  {name:'觀音國小', t:'玉里鎮', s:15, c:[0,0,0,0]},
+  {name:'卓楓國小', t:'卓溪鄉', s:15, c:[0,0,0,0]},
+  {name:'學田國小', t:'富里鄉', s:14, c:[0,0,0,0]},
+  {name:'永豐國小', t:'富里鄉', s:12, c:[0,0,0,0]},
+  {name:'舞鶴國小', t:'瑞穗鄉', s:9, c:[0,1,0,0]},
+  {name:'奇美國小', t:'瑞穗鄉', s:8, c:[0,0,0,0]},
+];
+
+let selCat = 0;
+const counts = [0,1,2,3].map(ci => schools.filter(s=>s.c[ci]===1).length);
+document.getElementById('totalCount').textContent = schools.length;
+
+function totalStudents(ci) {
+  return schools.filter(s=>s.c[ci]===1).reduce((a,s)=>a+s.s,0);
+}
+function avgStudents(ci) {
+  const list = schools.filter(s=>s.c[ci]===1);
+  return list.length ? Math.round(list.reduce((a,s)=>a+s.s,0)/list.length) : 0;
+}
+
+function select(ci) {
+  selCat = ci;
+  document.querySelectorAll('.cat-card').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.cat-card[data-ci="${ci}"]`).classList.add('active');
+
+  [0,1,2,3].forEach(i => {
+    const b = document.getElementById('panelBadge'+i);
+    if (!b) return;
+    b.style.display = i===ci ? 'inline-block' : 'none';
+  });
+
+  const titles = ['網路改善（教育處補助）','局部網路改善（學校自費）','建議改善名單','網路機房整線（學校自費）'];
+  document.getElementById('panelTitle').textContent = titles[ci];
+
+  renderBars(ci);
+  renderTags(ci);
+  renderStats(ci);
+  drawDonut(ci);
+}
+
+function renderBars(ci) {
+  const list = schools.filter(s=>s.c[ci]===1).sort((a,b)=>b.s-a.s);
+  const max = list[0]?.s || 1;
+  const color = COLORS[ci];
+  const bg = COLORS_BG[ci];
+  const border = COLORS_BORDER[ci];
+  const barList = document.getElementById('barList');
+  barList.innerHTML = '';
+
+  list.forEach((s,i) => {
+    const pct = Math.round((s.s/max)*100);
+    const row = document.createElement('div');
+    row.className = 'bar-row';
+    row.innerHTML = `
+      <div class="bar-name" title="${s.t} ${s.name}">${s.name}</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${pct}%;background:${bg};border:1px solid ${border};">
+          <span class="bar-val" style="color:${color};">${s.s}</span>
+        </div>
+      </div>
+      <div class="bar-town">${s.t}</div>`;
+    barList.appendChild(row);
+    setTimeout(() => {
+      row.querySelector('.bar-fill').style.width = pct+'%';
+    }, 20 + i*12);
+  });
+
+  const badge = document.getElementById('panelBadge'+ci);
+  if (badge) badge.textContent = counts[ci]+' 所學校';
+}
+
+function renderTags(ci) {
+  const list = schools.filter(s=>s.c[ci]===1).sort((a,b)=>b.s-a.s);
+  const color = COLORS[ci];
+  const bg = COLORS_BG[ci];
+  const border = COLORS_BORDER[ci];
+  const tc = document.getElementById('tagsCount');
+  tc.textContent = list.length+' 所';
+  tc.style.background = bg;
+  tc.style.color = color;
+
+  document.getElementById('tagGrid').innerHTML = list.map(s =>
+    `<span class="school-tag" style="background:${bg};border-color:${border};color:${color};" title="${s.s} 人">${s.name}</span>`
+  ).join('');
+}
+
+function renderStats(ci) {
+  const sr = document.getElementById('statRow');
+  const color = COLORS[ci];
+  const total = totalStudents(ci);
+  const avg = avgStudents(ci);
+  sr.innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">涵蓋學生人數</div>
+      <div class="stat-val" style="color:${color}">${total.toLocaleString()}<span class="stat-unit">人</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">平均每校人數</div>
+      <div class="stat-val" style="color:${color}">${avg}<span class="stat-unit">人</span></div>
+    </div>`;
+}
+
+function drawDonut(activeCi) {
+  const canvas = document.getElementById('donut');
+  const ctx = canvas.getContext('2d');
+  const W = 100, H = 100;
+  const cx = W/2, cy = H/2, r = 34, inner = 22;
+  ctx.clearRect(0,0,W,H);
+
+  const total = counts.reduce((a,b)=>a+b,0);
+  let start = -Math.PI/2;
+
+  counts.forEach((v, i) => {
+    const sweep = (v/total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy, i===activeCi ? r+3 : r, start, start+sweep);
+    ctx.closePath();
+    ctx.fillStyle = i===activeCi ? COLORS[i] : COLORS_BG[i];
+    ctx.fill();
+    start += sweep;
+  });
+
+  ctx.beginPath();
+  ctx.arc(cx,cy,inner,0,Math.PI*2);
+  ctx.fillStyle = '#ffffff';
+  ctx.fill();
+
+  ctx.fillStyle = COLORS[activeCi];
+  ctx.font = 'bold 14px system-ui, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(counts[activeCi], cx, cy-6);
+  ctx.fillStyle = '#6b7280';
+  ctx.font = '9px system-ui, sans-serif';
+  ctx.fillText('所學校', cx, cy+7);
+
+  const legend = document.getElementById('donutLegend');
+  legend.innerHTML = counts.map((v,i) => `
+    <div class="donut-item ${i===activeCi?'active':''}" onclick="select(${i})">
+      <span class="donut-dot" style="background:${COLORS[i]};${i!==activeCi?'opacity:0.45':''}"></span>
+      <span style="flex:1;${i===activeCi?'font-weight:600;':''}">${CATS[i]}</span>
+      <span class="donut-n" style="color:${COLORS[i]}">${v}</span>
+    </div>`).join('');
+}
+
+// 初始化
+select(0);
+</script>
 </body>
 </html>
+
