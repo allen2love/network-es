@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>花蓮縣各校網路改善清單｜Hualien Network ES</title>
+
+  <!-- 字型：沿用你給的那組 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Zen+Old+Mincho:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon & theme color -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>✨</text></svg>">
+  <meta name="theme-color" content="#667eea">
+
+  <style>
+    /* ====== 這裡保留你的液態背景 + 玻璃 UI + 密碼彈窗 CSS（可直接貼上） ====== */
+    /* 直接從你提供的 <style> 全段複製到這裡即可，內容不改 */
+  </style>
+</head>
+<body>
+  <!-- 液態波浪背景 -->
+  <div class="liquid-bg">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+
+  <div class="container">
+    <!-- 頁首：可依網路 ES 改字 -->
+    <header class="fade-in">
+      <h1>Hualien Network ES｜花蓮縣各校網路改善清單</h1>
+    </header>
+
+    <!-- Hero 區：改成說明這一頁用途 -->
+    <div class="glass-card hero fade-in">
+      <h2>花蓮縣各校網路改善清單</h2>
+      <p>校園網路建設概況：點選下方類別卡片，可查看不同改善類型所涵蓋之學校分布與名單。</p>
+      <a href="index.html" class="btn">返回首頁</a>
+    </div>
+
+    <!-- 類別卡片區：用你的 grid-item 當四大分類 -->
+    <section class="glass-card fade-in">
+      <h2 style="color: white; font-size: 2rem; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+        改善類別總覽
+      </h2>
+
+      <div class="grid">
+        <a href="#cat-subsidy" class="grid-item-link">
+          <div class="grid-item">
+            <h3>🌐 網路改善（補助）</h3>
+            <p>教育處補助經費，涵蓋 32 所學校。</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="#cat-partial" class="grid-item-link">
+          <div class="grid-item">
+            <h3>🔧 局部改善（自費）</h3>
+            <p>學校自籌經費，主要處理區域性瓶頸。</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="#cat-suggest" class="grid-item-link">
+          <div class="grid-item">
+            <h3>📋 建議改善名單</h3>
+            <p>列入後續規劃與評估之學校。</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="#cat-room" class="grid-item-link">
+          <div class="grid-item">
+            <h3>🖥️ 機房整線（自費）</h3>
+            <p>以機房整理、佈線優化為主的改善項目。</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 各類別詳細區塊：用表格放你現在 Markdown 的名單 -->
+    <section id="cat-subsidy" class="glass-card fade-in">
+      <h2 style="color: white; font-size: 1.8rem; margin-bottom: 16px;">網路改善（教育處補助）</h2>
+      <p style="color: rgba(255,255,255,0.9); margin-bottom: 16px;">
+        共 32 所學校，涵蓋學生 10,320 人，平均每校 323 人。
+      </p>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>學校名稱</th>
+              <th>學生人數</th>
+              <th>行政區</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>國風國中</td><td>1514</td><td>花蓮市</td></tr>
+            <tr><td>明義國小</td><td>1232</td><td>花蓮市</td></tr>
+            <tr><td>花崗國中</td><td>1170</td><td>花蓮市</td></tr>
+            <!-- 其餘學校照你原本 Markdown 一一貼上 -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 其他三類可以複製上一段結構再換內容 -->
+    <section id="cat-partial" class="glass-card fade-in">
+      <h2 style="color: white; font-size: 1.8rem; margin-bottom: 16px;">局部改善（自費）</h2>
+      <!-- 表格內容自行填入 -->
+    </section>
+
+    <section id="cat-suggest" class="glass-card fade-in">
+      <h2 style="color: white; font-size: 1.8rem; margin-bottom: 16px;">建議改善名單</h2>
+      <!-- 表格內容自行填入 -->
+    </section>
+
+    <section id="cat-room" class="glass-card fade-in">
+      <h2 style="color: white; font-size: 1.8rem; margin-bottom: 16px;">機房整線（自費）</h2>
+      <!-- 表格內容自行填入 -->
+    </section>
+
+    <!-- Footer：可以沿用你學院那個，或改成教育處版 -->
+    <footer class="fade-in">
+      <p>© 2026 花蓮縣教育處 校園網路建設</p>
+      <p style="margin-top: 10px; font-size: 0.9rem;">Hualien Network ES</p>
+      <div style="margin-top: 20px;">
+        <a href="#" class="btn-back-top">↑ 返回頂部</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 這裡貼上你原本的「返回頂部按鈕 CSS」＋「密碼彈窗 CSS & JS」就好 -->
+
+  <script>
+    /* 如果需要密碼區塊，直接複製你原本的 script；這一頁若不用可刪 */
+  </script>
+</body>
+</html>
